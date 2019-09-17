@@ -27,7 +27,7 @@
 </table>
 
 <c:if test="${sessionScope.user.isCashier()}">
-    <form action="/open_check">
+    <form action="${pageContext.request.contextPath}/api/open_check" method="post">
         <button class="btn btn-lg btn-success btn-block mt-2"><fmt:message key="open.check.message"/></button>
     </form>
 </c:if>

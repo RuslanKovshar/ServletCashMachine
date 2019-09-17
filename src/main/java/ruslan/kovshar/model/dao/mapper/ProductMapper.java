@@ -23,6 +23,7 @@ public class ProductMapper extends Mapper<Product> {
         product.setNameEN(rs.getString("name_en"));
         product.setNameUA(rs.getString("name_ua"));
         product.setPrice(rs.getBigDecimal("price"));
+        product.setType(type);
         return makeUnique(product, product.getId());
     }
 }

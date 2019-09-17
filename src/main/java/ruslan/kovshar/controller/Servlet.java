@@ -1,10 +1,7 @@
 package ruslan.kovshar.controller;
 
 import ruslan.kovshar.controller.command.*;
-import ruslan.kovshar.controller.command.get.HomePageCommand;
-import ruslan.kovshar.controller.command.get.LoginPageCommand;
-import ruslan.kovshar.controller.command.get.MerchandiserPageCommand;
-import ruslan.kovshar.controller.command.get.RegistrationPageCommand;
+import ruslan.kovshar.controller.command.get.*;
 import ruslan.kovshar.controller.command.post.*;
 import ruslan.kovshar.view.Pages;
 import ruslan.kovshar.view.TextConstants;
@@ -29,11 +26,16 @@ public class Servlet extends HttpServlet {
         commands.put(TextConstants.POST + URI.LOGOUT,                       new LogoutCommand());
         commands.put(TextConstants.POST + URI.MERCHANDISER + URI.PRODUCT,   new MerchandiserProductCommand());
         commands.put(TextConstants.POST + URI.MERCHANDISER + URI.STOCK,     new MerchandiserStockCommand());
+        commands.put(TextConstants.POST + URI.OPEN_CHECK,                   new OpenCheckCommand());
+        commands.put(TextConstants.POST + URI.CHECK + URI.PRODUCT,          new CheckProductCommand());
+        commands.put(TextConstants.POST + URI.CHECK + URI.ADD_PRODUCT,      new CheckAddProduct());
 
         commands.put(TextConstants.GET + URI.MERCHANDISER,                  new MerchandiserPageCommand());
         commands.put(TextConstants.GET + URI.HOME,                          new HomePageCommand());
         commands.put(TextConstants.GET + URI.LOGIN,                         new LoginPageCommand());
         commands.put(TextConstants.GET + URI.REGISTRATION,                  new RegistrationPageCommand());
+        commands.put(TextConstants.GET + URI.CHECK,                         new CheckPageCommand());
+        commands.put(TextConstants.GET + URI.CHECK + URI.PRODUCT,          new CheckProductPageCommand());
     }
 
     @Override

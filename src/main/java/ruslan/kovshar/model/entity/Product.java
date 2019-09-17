@@ -3,6 +3,7 @@ package ruslan.kovshar.model.entity;
 import ruslan.kovshar.model.enums.Types;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public abstract class Product {
 
@@ -13,7 +14,7 @@ public abstract class Product {
     protected BigDecimal price;
     protected Types type;
 
-    public abstract BigDecimal calculatePrice(Number value);
+    public abstract BigDecimal calculatePrice(Integer value);
 
     public Product() {
     }
@@ -72,5 +73,35 @@ public abstract class Product {
 
     public void setType(Types type) {
         this.type = type;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(id, product.id) &&
+                Objects.equals(code, product.code) &&
+                Objects.equals(nameUA, product.nameUA) &&
+                Objects.equals(nameEN, product.nameEN) &&
+                Objects.equals(price, product.price) &&
+                type == product.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, code, nameUA, nameEN, price, type);
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", code=" + code +
+                ", nameUA='" + nameUA + '\'' +
+                ", nameEN='" + nameEN + '\'' +
+                ", price=" + price +
+                ", type=" + type +
+                '}';
     }
 }

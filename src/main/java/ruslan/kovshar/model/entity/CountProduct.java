@@ -6,8 +6,8 @@ import java.math.BigDecimal;
 
 public class CountProduct extends Product{
     @Override
-    public BigDecimal calculatePrice(Number value) {
-        return price.multiply(new BigDecimal(value.intValue()));
+    public BigDecimal calculatePrice(Integer value) {
+        return price.multiply(new BigDecimal(value));
     }
 
     public CountProduct() {

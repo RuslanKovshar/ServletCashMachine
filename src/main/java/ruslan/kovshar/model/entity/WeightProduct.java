@@ -7,8 +7,8 @@ import java.math.RoundingMode;
 
 public class WeightProduct extends Product {
     @Override
-    public BigDecimal calculatePrice(Number value) {
-        return price.divide(new BigDecimal(1000 / value.doubleValue()),2, RoundingMode.HALF_UP);
+    public BigDecimal calculatePrice(Integer value) {
+        return price.divide(new BigDecimal(1000 / value),2, RoundingMode.HALF_UP);
     }
 
     public WeightProduct() {
