@@ -1,11 +1,15 @@
 package ruslan.kovshar.model.dao.impl;
 
 import ruslan.kovshar.model.dao.CheckDao;
+import ruslan.kovshar.model.dao.mapper.CheckMapper;
 import ruslan.kovshar.model.entity.Check;
+import ruslan.kovshar.model.entity.User;
 import ruslan.kovshar.view.SQL;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class JdbcCheckDao implements CheckDao {
     private Connection connection;
@@ -22,7 +26,7 @@ public class JdbcCheckDao implements CheckDao {
             ps.executeUpdate();
 
             ResultSet generatedKeys = ps.getGeneratedKeys();
-            while (generatedKeys.next()){
+            while (generatedKeys.next()) {
                 entity.setId(generatedKeys.getLong(1));
             }
         } catch (SQLException e) {
@@ -53,5 +57,23 @@ public class JdbcCheckDao implements CheckDao {
     @Override
     public void close() {
 
+    }
+
+    @Override
+    public List<Check> findAllByUser(User user) {
+        List<Check> checks = new ArrayList<>();
+        try (PreparedStatement ps = connection.prepareStatement(SQL.SELECT_CHECK_BY_USER)) {
+            ps.setLong(1, user.getId());
+            final ResultSet resultSet = ps.executeQuery();
+            CheckMapper mapper = new CheckMapper();
+            while (resultSet.next()) {
+                Check check = mapper.extractFromResultSet(resultSet);
+                check.setUser(user);
+                checks.add(check);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return checks;
     }
 }

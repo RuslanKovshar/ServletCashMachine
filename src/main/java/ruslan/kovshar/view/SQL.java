@@ -6,7 +6,6 @@ public interface SQL {
     String SELECT_USER_BY_EMAIL_AND_PASSWORD = "SELECT * FROM users WHERE email = ? AND password = ?";
 
 
-
     /*Sql queries for Roles*/
     String INSERT_NEW_ROLE = "INSERT INTO user_roles VALUES (?,?)";
     String SELECT_ROLE = "SELECT * FROM user_roles WHERE user_id = ?";
@@ -23,7 +22,9 @@ public interface SQL {
 
     /*Sql queries for Check*/
     String INSERT_NEW_CHECK = "INSERT INTO checks (total_price, user_id) VALUES (?,?)";
+    String SELECT_CHECK_BY_USER = "SELECT * FROM checks WHERE user_id = ?";
 
     /*Sql queries for ProductInCheck*/
     String INSERT_NEW_PRODUCT_IN_CHECK = "INSERT INTO product_in_check (price, value, check_id, product_id) VALUES (?,?,?,?)";
+    String SELECT_PRODUCTS_BY_CHECK = "SELECT * FROM product_in_check JOIN products ON products.id = product_id WHERE check_id = ?";
 }

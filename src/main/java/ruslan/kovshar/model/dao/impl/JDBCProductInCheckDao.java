@@ -1,13 +1,18 @@
 package ruslan.kovshar.model.dao.impl;
 
 import ruslan.kovshar.model.dao.ProductInCheckDao;
+import ruslan.kovshar.model.dao.mapper.ProductInCheckMapper;
+import ruslan.kovshar.model.entity.Check;
 import ruslan.kovshar.model.entity.ProductInCheck;
 import ruslan.kovshar.view.SQL;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class JDBCProductInCheckDao implements ProductInCheckDao {
 
@@ -53,5 +58,22 @@ public class JDBCProductInCheckDao implements ProductInCheckDao {
     @Override
     public void close() {
 
+    }
+
+    @Override
+    public Set<ProductInCheck> findAllByCheck(Check check) {
+        Set<ProductInCheck> result = new HashSet<>();
+        try (final PreparedStatement ps = connection.prepareStatement(SQL.SELECT_PRODUCTS_BY_CHECK)) {
+            ps.setLong(1, check.getId());
+            final ResultSet resultSet = ps.executeQuery();
+            ProductInCheckMapper mapper = new ProductInCheckMapper();
+            while (resultSet.next()) {
+                result.add(mapper.extractFromResultSet(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        result.forEach(productInCheck -> System.out.println(productInCheck.getProduct()));
+        return result;
     }
 }
