@@ -24,7 +24,6 @@ public class CheckAddProduct implements Command {
         Product product = (Product) session.getAttribute("product");
         Check check = (Check) session.getAttribute("check");
 
-
         try {
             stockService.updateStock(product, value);
         } catch (TransactionException e) {

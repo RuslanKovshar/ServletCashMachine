@@ -42,4 +42,9 @@ public class JdbcDaoFactory extends DaoFactory {
     public UserDao createUserDao() {
         return new JdbcUserDao(getConnection());
     }
+
+    @Override
+    public ProductInCheckDao createProductInCheckDao() {
+        return new JDBCProductInCheckDao(getConnection());
+    }
 }

@@ -42,4 +42,14 @@ public class Check {
     public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
+
+    @Override
+    public String toString() {
+        return "Check{" +
+                "id=" + id +
+                ", products=" + products +
+                ", user=" + user +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
 }

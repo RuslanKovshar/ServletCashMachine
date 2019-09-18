@@ -29,6 +29,7 @@ public class Servlet extends HttpServlet {
         commands.put(TextConstants.POST + URI.OPEN_CHECK,                   new OpenCheckCommand());
         commands.put(TextConstants.POST + URI.CHECK + URI.PRODUCT,          new CheckProductCommand());
         commands.put(TextConstants.POST + URI.CHECK + URI.ADD_PRODUCT,      new CheckAddProduct());
+        commands.put(TextConstants.POST + URI.CLOSE_CHECK,                  new CloseCheckCommand());
 
         commands.put(TextConstants.GET + URI.MERCHANDISER,                  new MerchandiserPageCommand());
         commands.put(TextConstants.GET + URI.HOME,                          new HomePageCommand());
