@@ -23,6 +23,7 @@ public interface SQL {
     /*Sql queries for Check*/
     String INSERT_NEW_CHECK = "INSERT INTO checks (total_price, user_id) VALUES (?,?)";
     String SELECT_CHECK_BY_USER = "SELECT * FROM checks WHERE user_id = ?";
+    String DELETE_CHECK = "DELETE FROM checks WHERE id = ?";
 
     /*Sql queries for ProductInCheck*/
     String INSERT_NEW_PRODUCT_IN_CHECK = "INSERT INTO product_in_check (price, value, check_id, product_id) VALUES (?,?,?,?)";

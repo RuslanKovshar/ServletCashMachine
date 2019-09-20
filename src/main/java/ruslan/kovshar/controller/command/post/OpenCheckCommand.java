@@ -11,7 +11,9 @@ public class OpenCheckCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        session.setAttribute("check", new Check());
+        if (session.getAttribute("check") == null) {
+            session.setAttribute("check", new Check());
+        }
         return URI.REDIRECT + request.getServletPath() + URI.CHECK;
     }
 }

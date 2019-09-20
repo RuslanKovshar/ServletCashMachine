@@ -10,7 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 
 public class CheckProductCommand implements Command {
 
-    private ProductService productService = new ProductService();
+    private ProductService productService;
+
+    public CheckProductCommand(ProductService productService) {
+        this.productService = productService;
+    }
 
     @Override
     public String execute(HttpServletRequest request) {

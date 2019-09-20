@@ -11,6 +11,6 @@ public interface Pages {
     String PRODUCT_PAGE = WEB_INF + "product" + JSP;
     String REGISTRATION_PAGE = WEB_INF + "registration" + JSP;
     String X_REPORT_PAGE = WEB_INF + "x-report" + JSP;
-    String Z_REPORT_PAGE = WEB_INF + "z-report" + JSP;
+    String Z_REPORT_PAGE = WEB_INF + "z_report" + JSP;
     String ERROR_404_PAGE = WEB_INF + "404" + JSP;
 }

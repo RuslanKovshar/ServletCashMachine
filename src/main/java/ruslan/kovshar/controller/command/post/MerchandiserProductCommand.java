@@ -17,8 +17,13 @@ import java.math.BigDecimal;
 
 public class MerchandiserProductCommand implements Command {
 
-    private ProductService productService = new ProductService();
-    private StockService stockService = new StockService();
+    private ProductService productService;
+    private StockService stockService;
+
+    public MerchandiserProductCommand(ProductService productService, StockService stockService) {
+        this.productService = productService;
+        this.stockService = stockService;
+    }
 
     @Override
     public String execute(HttpServletRequest request) {

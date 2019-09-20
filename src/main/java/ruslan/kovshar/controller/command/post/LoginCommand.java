@@ -14,8 +14,13 @@ import java.util.Optional;
 
 public class LoginCommand implements Command {
 
-    private UserService userService = new UserService();
-    private RoleService roleService = new RoleService();
+    private UserService userService;
+    private RoleService roleService;
+
+    public LoginCommand(UserService userService, RoleService roleService) {
+        this.userService = userService;
+        this.roleService = roleService;
+    }
 
     @Override
     public String execute(HttpServletRequest request) {

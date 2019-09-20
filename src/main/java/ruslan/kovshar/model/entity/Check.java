@@ -43,6 +43,11 @@ public class Check {
         this.totalPrice = totalPrice;
     }
 
+    public void calculateTotalPrice() {
+        double sum = products.stream().mapToDouble(products -> products.getPrice().doubleValue()).sum();
+        this.totalPrice = BigDecimal.valueOf(sum);
+    }
+
     @Override
     public String toString() {
         return "Check{" +

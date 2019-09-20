@@ -12,8 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 
 public class MerchandiserStockCommand implements Command {
 
-    private ProductService productService = new ProductService();
-    private StockService stockService = new StockService();
+    private ProductService productService;
+    private StockService stockService;
+
+    public MerchandiserStockCommand(ProductService productService, StockService stockService) {
+        this.productService = productService;
+        this.stockService = stockService;
+    }
 
     @Override
     public String execute(HttpServletRequest request) {

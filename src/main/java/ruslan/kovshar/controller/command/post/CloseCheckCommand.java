@@ -11,7 +11,11 @@ import javax.servlet.http.HttpSession;
 
 public class CloseCheckCommand implements Command {
 
-    private CheckService checkService = new CheckService();
+    private CheckService checkService;
+
+    public CloseCheckCommand(CheckService checkService) {
+        this.checkService = checkService;
+    }
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -21,6 +25,6 @@ public class CloseCheckCommand implements Command {
         check.setUser(user);
         checkService.createCheck(check);
         session.removeAttribute("check");
-        return URI.REDIRECT + request.getServletPath() + URI.CHECK;
+        return URI.REDIRECT + request.getServletPath() + "/";
     }
 }

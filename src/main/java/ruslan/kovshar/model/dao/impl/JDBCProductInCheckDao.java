@@ -57,7 +57,11 @@ public class JDBCProductInCheckDao implements ProductInCheckDao {
 
     @Override
     public void close() {
-
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

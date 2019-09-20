@@ -3,6 +3,7 @@ package ruslan.kovshar.controller;
 import ruslan.kovshar.controller.command.*;
 import ruslan.kovshar.controller.command.get.*;
 import ruslan.kovshar.controller.command.post.*;
+import ruslan.kovshar.model.service.*;
 import ruslan.kovshar.view.Pages;
 import ruslan.kovshar.view.TextConstants;
 import ruslan.kovshar.view.URI;
@@ -21,24 +22,25 @@ public class Servlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        commands.put(TextConstants.POST + URI.LOGIN,                        new LoginCommand());
-        commands.put(TextConstants.POST + URI.REGISTRATION,                 new RegistrationCommand());
-        commands.put(TextConstants.POST + URI.LOGOUT,                       new LogoutCommand());
-        commands.put(TextConstants.POST + URI.MERCHANDISER + URI.PRODUCT,   new MerchandiserProductCommand());
-        commands.put(TextConstants.POST + URI.MERCHANDISER + URI.STOCK,     new MerchandiserStockCommand());
-        commands.put(TextConstants.POST + URI.OPEN_CHECK,                   new OpenCheckCommand());
-        commands.put(TextConstants.POST + URI.CHECK + URI.PRODUCT,          new CheckProductCommand());
-        commands.put(TextConstants.POST + URI.CHECK + URI.ADD_PRODUCT,      new CheckAddProduct());
-        commands.put(TextConstants.POST + URI.CLOSE_CHECK,                  new CloseCheckCommand());
+        commands.put(TextConstants.POST + URI.LOGIN, new LoginCommand(new UserService(), new RoleService()));
+        commands.put(TextConstants.POST + URI.REGISTRATION, new RegistrationCommand(new UserService()));
+        commands.put(TextConstants.POST + URI.LOGOUT, new LogoutCommand());
+        commands.put(TextConstants.POST + URI.MERCHANDISER + URI.PRODUCT, new MerchandiserProductCommand(new ProductService(), new StockService()));
+        commands.put(TextConstants.POST + URI.MERCHANDISER + URI.STOCK, new MerchandiserStockCommand(new ProductService(), new StockService()));
+        commands.put(TextConstants.POST + URI.OPEN_CHECK, new OpenCheckCommand());
+        commands.put(TextConstants.POST + URI.CHECK + URI.PRODUCT, new CheckProductCommand(new ProductService()));
+        commands.put(TextConstants.POST + URI.CHECK + URI.ADD_PRODUCT, new CheckAddProduct(new StockService()));
+        commands.put(TextConstants.POST + URI.CLOSE_CHECK, new CloseCheckCommand(new CheckService()));
+        commands.put(TextConstants.POST + URI.CHECK + URI.REMOVE_PRODUCT, new CheckRemoveProductCommand(new StockService()));
 
-        commands.put(TextConstants.GET + "/rest",                           new RestCommand());
 
-        commands.put(TextConstants.GET + URI.MERCHANDISER,                  new MerchandiserPageCommand());
-        commands.put(TextConstants.GET + URI.HOME,                          new HomePageCommand());
-        commands.put(TextConstants.GET + URI.LOGIN,                         new LoginPageCommand());
-        commands.put(TextConstants.GET + URI.REGISTRATION,                  new RegistrationPageCommand());
-        commands.put(TextConstants.GET + URI.CHECK,                         new CheckPageCommand());
-        commands.put(TextConstants.GET + URI.CHECK + URI.PRODUCT,          new CheckProductPageCommand());
+        commands.put(TextConstants.GET + URI.MERCHANDISER, new MerchandiserPageCommand());
+        commands.put(TextConstants.GET + URI.HOME, new HomePageCommand());
+        commands.put(TextConstants.GET + URI.LOGIN, new LoginPageCommand());
+        commands.put(TextConstants.GET + URI.REGISTRATION, new RegistrationPageCommand());
+        commands.put(TextConstants.GET + URI.CHECK, new CheckPageCommand());
+        commands.put(TextConstants.GET + URI.CHECK + URI.PRODUCT, new CheckProductPageCommand());
+        commands.put(TextConstants.GET + URI.Z_REPORT, new ZReportPageCommand(new CheckService()));
     }
 
     @Override
@@ -62,7 +64,7 @@ public class Servlet extends HttpServlet {
 
     private String getPage(HttpServletRequest req) {
         String path = req.getRequestURI();
-        path = path.replaceAll(".*/api" , "");
+        path = path.replaceAll(".*/api", "");
         path = req.getMethod() + ':' + path;
         Command command = commands.getOrDefault(path, (r) -> Pages.ERROR_404_PAGE);
         return command.execute(req);

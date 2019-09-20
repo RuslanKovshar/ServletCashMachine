@@ -12,7 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 
 public class RegistrationCommand implements Command {
 
-    private UserService userService = new UserService();
+    private UserService userService;
+
+    public RegistrationCommand(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     public String execute(HttpServletRequest request) {

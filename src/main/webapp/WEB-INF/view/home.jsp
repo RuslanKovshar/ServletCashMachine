@@ -45,7 +45,7 @@
         </button>
     </form>
 
-    <form action="/senior_cashier/z-report">
+    <form action="${pageContext.request.contextPath}/api/z-report">
         <button type="submit" class="btn btn-success btn-lg btn-block mt-2">
             <fmt:message key="z-report.message"/>
         </button>

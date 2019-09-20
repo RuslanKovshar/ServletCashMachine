@@ -15,7 +15,11 @@ import java.util.Optional;
 
 public class CheckAddProduct implements Command {
 
-    private StockService stockService = new StockService();
+    private StockService stockService;
+
+    public CheckAddProduct(StockService stockService) {
+        this.stockService = stockService;
+    }
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -43,11 +47,6 @@ public class CheckAddProduct implements Command {
             ProductInCheck newProduct = new ProductInCheck();
             newProduct.setProduct(product);
             newProduct.setValue(value);
-          /*  if (product.getType().equals(Types.PIECE_PRODUCT)) {
-                newProduct.setValue(number.intValue());
-            } else {
-                newProduct.setValue(number.doubleValue());
-            }*/
             newProduct.setPrice(product.calculatePrice(value));
             newProduct.setCheck(check);
             check.getProducts().add(newProduct);

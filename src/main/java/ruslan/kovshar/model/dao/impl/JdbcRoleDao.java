@@ -78,6 +78,10 @@ public class JdbcRoleDao implements RoleDao {
 
     @Override
     public void close() {
-
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -27,7 +27,23 @@
     <tbody>
     <c:forEach items="${sessionScope.check.products}" var="productInCheck">
         <tr>
-            <td>${productInCheck.product.nameUA}</td>
+            <td>
+                <div class="row">
+                    <div class="col">
+                            ${productInCheck.product.nameUA}
+                    </div>
+                    <div class="col">
+                        <c:if test="${sessionScope.user.isSeniorCashier()}">
+                            <form action="${pageContext.request.contextPath}/api/check/remove_product" method="post">
+                                <input type="hidden" value="${productInCheck.product.nameUA}" name="name">
+                                <button type="submit" class="btn btn-small btn-danger">
+                                    <fmt:message key="remove.product.message"/>
+                                </button>
+                            </form>
+                        </c:if>
+                    </div>
+                </div>
+            </td>
             <td>
                 <c:if test="${productInCheck.product.type == 'PIECE_PRODUCT'}">
                     X${productInCheck.value}

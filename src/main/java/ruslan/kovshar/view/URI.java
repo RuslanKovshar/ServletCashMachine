@@ -11,6 +11,7 @@ public interface URI {
     String CHECK = "/check";
     String PRODUCT = "/product";
     String ADD_PRODUCT = "/add_product";
+    String REMOVE_PRODUCT = "/remove_product";
     String ID = "/{id}";
     String OPEN_CHECK = "/open_check";
     String CLOSE_CHECK = "/close_check";

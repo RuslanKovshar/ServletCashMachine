@@ -51,12 +51,21 @@ public class JdbcCheckDao implements CheckDao {
 
     @Override
     public void delete(Long id) {
-
+        try (final PreparedStatement ps = connection.prepareStatement(SQL.DELETE_CHECK)) {
+            ps.setLong(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void close() {
-
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

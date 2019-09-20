@@ -2,11 +2,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="ruslan.kovshar.view.RequestParams" %>
 
-<fmt:setLocale value="${param.lang}" />
-<fmt:setBundle basename="messages" />
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="messages"/>
 
 <!DOCTYPE html>
-<html lang="${param.lang}">
+<html lang="${sessionScope.lang}">
 <head>
     <title>Reg Form</title>
     <!-- Required meta tags -->

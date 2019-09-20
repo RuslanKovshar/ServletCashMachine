@@ -59,7 +59,11 @@ public class JdbcProductDao implements ProductDao {
 
     @Override
     public void close() {
-
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -28,4 +28,10 @@ public class CheckService {
             return userChecks;
         }
     }
+
+    public void deleteCheck(Check check) {
+        try(final CheckDao checkDao = daoFactory.createCheckDao()) {
+            checkDao.delete(check.getId());
+        }
+    }
 }

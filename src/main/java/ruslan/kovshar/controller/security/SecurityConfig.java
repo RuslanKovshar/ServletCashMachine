@@ -16,7 +16,7 @@ class SecurityConfig {
 
         pagesByRoles.put(Roles.MERCHANDISER, Arrays.asList(URI.MERCHANDISER));
 
-        pagesByRoles.put(Roles.SENIOR_CASHIER, Arrays.asList(URI.SENIOR_CASHIER));
+        pagesByRoles.put(Roles.SENIOR_CASHIER, Arrays.asList(URI.Z_REPORT, URI.X_REPORT));
     }
 
     public static Set<Roles> getAllAppRoles() {
