@@ -30,10 +30,12 @@ public class Servlet extends HttpServlet {
         commands.put(TextConstants.POST + URI.OPEN_CHECK, new OpenCheckCommand());
         commands.put(TextConstants.POST + URI.CHECK + URI.PRODUCT, new CheckProductCommand(new ProductService()));
         commands.put(TextConstants.POST + URI.CHECK + URI.ADD_PRODUCT, new CheckAddProduct(new StockService()));
-        commands.put(TextConstants.POST + URI.CLOSE_CHECK, new CloseCheckCommand(new CheckService()));
+        commands.put(TextConstants.POST + URI.CLOSE_CHECK, new CloseCheckCommand());
         commands.put(TextConstants.POST + URI.CHECK + URI.REMOVE_PRODUCT, new CheckRemoveProductCommand(new StockService()));
+        commands.put(TextConstants.POST + URI.PAYMENT,new PaymentCommand());
 
-
+        commands.put(TextConstants.GET + URI.CHECKS,new AllChecksPageCommand(new CheckService()));
+        commands.put(TextConstants.GET + URI.PAYMENT, new PayingPageCommand());
         commands.put(TextConstants.GET + URI.MERCHANDISER, new MerchandiserPageCommand());
         commands.put(TextConstants.GET + URI.HOME, new HomePageCommand());
         commands.put(TextConstants.GET + URI.LOGIN, new LoginPageCommand());

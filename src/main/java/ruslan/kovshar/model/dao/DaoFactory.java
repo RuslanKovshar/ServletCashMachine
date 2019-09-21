@@ -17,6 +17,10 @@ public abstract class DaoFactory {
 
     public abstract ProductInCheckDao createProductInCheckDao();
 
+    public abstract BuyerDao createBuyerDao();
+
+    public abstract MoneyDao createMoneyDao();
+
     public static DaoFactory getInstance() {
         if (daoFactory == null) {
             synchronized (DaoFactory.class) {

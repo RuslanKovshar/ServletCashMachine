@@ -24,4 +24,7 @@ public interface RequestParams {
     String TYPE = "type";
 
     String NAME = "name";
+    String NAME_ON_CARD = "nameOnCard";
+    String CARD_NUMBER = "cardNumber";
+    String VALUE = "value";
 }

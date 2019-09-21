@@ -39,7 +39,13 @@
 </c:if>
 
 <c:if test="${sessionScope.user.isSeniorCashier()}">
-    <form action="/senior_cashier/x-report">
+    <form action="${pageContext.request.contextPath}/api/checks">
+        <button type="submit" class="btn btn-success btn-lg btn-block mt-2">
+            All checks
+        </button>
+    </form>
+
+    <form action="${pageContext.request.contextPath}/senior_cashier/x-report">
         <button type="submit" class="btn btn-success btn-lg btn-block mt-2">
             <fmt:message key="x-report.message"/>
         </button>

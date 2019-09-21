@@ -4,6 +4,7 @@ import ruslan.kovshar.model.enums.Roles;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.util.Set;
 
 public class User {
@@ -17,6 +18,7 @@ public class User {
     private String secondNameEN;
     private Set<Roles> authorities;
     private Set<Check> checks;
+    private BigDecimal userMoney = BigDecimal.ZERO;
 
     public User() {
     }
@@ -100,6 +102,14 @@ public class User {
 
     public void setChecks(Set<Check> checks) {
         this.checks = checks;
+    }
+
+    public BigDecimal getUserMoney() {
+        return userMoney;
+    }
+
+    public void setUserMoney(BigDecimal userMoney) {
+        this.userMoney = userMoney;
     }
 
     public String i18nFirstName(HttpServletRequest request) {

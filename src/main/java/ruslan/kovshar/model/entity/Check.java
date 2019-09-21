@@ -10,6 +10,7 @@ public class Check {
     private Set<ProductInCheck> products = new HashSet<>();
     private User user;
     private BigDecimal totalPrice = BigDecimal.ZERO;
+    private Buyer buyer;
 
     public Long getId() {
         return id;
@@ -41,6 +42,14 @@ public class Check {
 
     public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public Buyer getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(Buyer buyer) {
+        this.buyer = buyer;
     }
 
     public void calculateTotalPrice() {

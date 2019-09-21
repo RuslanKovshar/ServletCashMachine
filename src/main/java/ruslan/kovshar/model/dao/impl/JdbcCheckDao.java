@@ -23,6 +23,7 @@ public class JdbcCheckDao implements CheckDao {
         try (PreparedStatement ps = connection.prepareStatement(SQL.INSERT_NEW_CHECK, Statement.RETURN_GENERATED_KEYS)) {
             ps.setBigDecimal(1, entity.getTotalPrice());
             ps.setLong(2, entity.getUser().getId());
+            ps.setLong(3, entity.getBuyer().getId());
             ps.executeUpdate();
 
             ResultSet generatedKeys = ps.getGeneratedKeys();
@@ -41,7 +42,17 @@ public class JdbcCheckDao implements CheckDao {
 
     @Override
     public List<Check> findAll() {
-        return null;
+        List<Check> checks = new ArrayList<>();
+        try (PreparedStatement ps = connection.prepareStatement(SQL.SELECT_ALL_CHECK)) {
+            final ResultSet resultSet = ps.executeQuery();
+            CheckMapper mapper = new CheckMapper();
+            while (resultSet.next()) {
+                checks.add(mapper.extractFromResultSet(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return checks;
     }
 
     @Override

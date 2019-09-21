@@ -11,7 +11,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 
 public class ZReportPageCommand implements Command {
@@ -25,7 +24,7 @@ public class ZReportPageCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
-        List<Check> allChecks = checkService.getAllChecks(user);
+        List<Check> allChecks = checkService.getAllUserChecks(user);
 
         int countOfChecks = allChecks.size();
         double totalMoney = allChecks.stream().mapToDouble(s -> s.getTotalPrice().doubleValue()).sum();

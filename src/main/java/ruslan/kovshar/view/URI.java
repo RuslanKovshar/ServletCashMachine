@@ -22,4 +22,6 @@ public interface URI {
     String CASHIER = "/cashier";
     String REDIRECT = "redirect:";
     String LOGOUT = "/logout";
+    String PAYMENT = "/payment";
+    String CHECKS = "/checks";
 }

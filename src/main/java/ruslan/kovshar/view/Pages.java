@@ -13,4 +13,6 @@ public interface Pages {
     String X_REPORT_PAGE = WEB_INF + "x-report" + JSP;
     String Z_REPORT_PAGE = WEB_INF + "z_report" + JSP;
     String ERROR_404_PAGE = WEB_INF + "404" + JSP;
+    String PAYING_PAGE = WEB_INF + "pay_check" + JSP;
+    String ALL_CHECKS_PAGE = WEB_INF + "checks" + JSP;
 }

@@ -20,7 +20,7 @@ public class CheckService {
         }
     }
 
-    public List<Check> getAllChecks(User user) {
+    public List<Check> getAllUserChecks(User user) {
         try(final CheckDao checkDao = daoFactory.createCheckDao();
             final ProductInCheckDao productInCheckDao = daoFactory.createProductInCheckDao()) {
             List<Check> userChecks = checkDao.findAllByUser(user);
