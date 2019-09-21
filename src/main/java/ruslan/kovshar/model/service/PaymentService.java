@@ -12,6 +12,7 @@ public class PaymentService {
 
     private DaoFactory daoFactory = DaoFactory.getInstance();
 
+    //TODO: заменить транзакцией(сделать красиво)
     public void makePay(Buyer buyer, User user, BigDecimal money) {
         try (final BuyerDao buyerDao = daoFactory.createBuyerDao();
              final MoneyDao moneyDao = daoFactory.createMoneyDao()) {
@@ -21,4 +22,13 @@ public class PaymentService {
             e.printStackTrace();
         }
     }
+
+    public void returnMoney(User user, BigDecimal money) {
+        try (final MoneyDao moneyDao = daoFactory.createMoneyDao()) {
+            moneyDao.updateUserMoney(user, money);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

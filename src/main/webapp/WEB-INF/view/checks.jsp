@@ -29,6 +29,10 @@
                 </tr>
                 </tbody>
             </table>
+            <form action="${pageContext.request.contextPath}/api/cancel_check?id=${check.id}"
+                  method="post">
+                <button type="submit">Cancel</button>
+            </form>
         </div>
     </div>
 </div>

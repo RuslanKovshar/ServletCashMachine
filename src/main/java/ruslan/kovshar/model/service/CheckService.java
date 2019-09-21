@@ -24,7 +24,7 @@ public class CheckService {
         try(final CheckDao checkDao = daoFactory.createCheckDao();
             final ProductInCheckDao productInCheckDao = daoFactory.createProductInCheckDao()) {
             List<Check> userChecks = checkDao.findAllByUser(user);
-            userChecks.forEach(check ->  check.setProducts(productInCheckDao.findAllByCheck(check)));
+            userChecks.forEach(check -> check.setProducts(productInCheckDao.findAllByCheck(check)));
             return userChecks;
         }
     }
@@ -32,6 +32,15 @@ public class CheckService {
     public void deleteCheck(Check check) {
         try(final CheckDao checkDao = daoFactory.createCheckDao()) {
             checkDao.delete(check.getId());
+        }
+    }
+
+    public Check findCheckById(long id) {
+        try(final CheckDao checkDao = daoFactory.createCheckDao();
+            final ProductInCheckDao productInCheckDao = daoFactory.createProductInCheckDao()) {
+            Check check = checkDao.findById(id);
+            check.setProducts(productInCheckDao.findAllByCheck(check));
+            return check;
         }
     }
 }

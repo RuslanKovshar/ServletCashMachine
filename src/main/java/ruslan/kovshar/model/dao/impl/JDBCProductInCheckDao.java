@@ -77,7 +77,6 @@ public class JDBCProductInCheckDao implements ProductInCheckDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        result.forEach(productInCheck -> System.out.println(productInCheck.getProduct()));
         return result;
     }
 }

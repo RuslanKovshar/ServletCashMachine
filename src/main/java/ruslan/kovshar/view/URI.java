@@ -24,4 +24,5 @@ public interface URI {
     String LOGOUT = "/logout";
     String PAYMENT = "/payment";
     String CHECKS = "/checks";
+    String CANCEL_CHECK = "/cancel_check";
 }

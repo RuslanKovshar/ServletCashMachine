@@ -33,6 +33,7 @@ public class Servlet extends HttpServlet {
         commands.put(TextConstants.POST + URI.CLOSE_CHECK, new CloseCheckCommand());
         commands.put(TextConstants.POST + URI.CHECK + URI.REMOVE_PRODUCT, new CheckRemoveProductCommand(new StockService()));
         commands.put(TextConstants.POST + URI.PAYMENT,new PaymentCommand());
+        commands.put(TextConstants.POST + URI.CANCEL_CHECK,new CancelCheckCommand());
 
         commands.put(TextConstants.GET + URI.CHECKS,new AllChecksPageCommand(new CheckService()));
         commands.put(TextConstants.GET + URI.PAYMENT, new PayingPageCommand());

@@ -7,7 +7,7 @@ public interface SQL {
 
     /*Sql queries for Money*/
     String INSERT_NEW_AMOUNT = "INSERT INTO user_money VALUES (?,?)";
-    String UPDATE_AMOUNT_OF_MONEY = "UPDATE user_money SET value = ? WHERE user_id = ?";
+    String UPDATE_AMOUNT_OF_MONEY = "UPDATE user_money SET value = value + ? WHERE user_id = ?";
 
     /*Sql queries for Roles*/
     String INSERT_NEW_ROLE = "INSERT INTO user_roles VALUES (?,?)";
@@ -27,6 +27,7 @@ public interface SQL {
     String INSERT_NEW_CHECK = "INSERT INTO checks (total_price, user_id, buyer_id) VALUES (?,?,?)";
     String SELECT_ALL_CHECK = "SELECT * FROM checks";
     String SELECT_CHECK_BY_USER = "SELECT * FROM checks WHERE user_id = ?";
+    String SELECT_CHECK_BY_ID_WITH_BUYER = "SELECT * FROM checks JOIN buyer_info ON checks.buyer_id = buyer_info.id WHERE checks.id = ?";
     String DELETE_CHECK = "DELETE FROM checks WHERE id = ?";
 
     /*Sql queries for ProductInCheck*/

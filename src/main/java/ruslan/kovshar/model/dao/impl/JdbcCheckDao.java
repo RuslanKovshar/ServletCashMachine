@@ -1,6 +1,7 @@
 package ruslan.kovshar.model.dao.impl;
 
 import ruslan.kovshar.model.dao.CheckDao;
+import ruslan.kovshar.model.dao.mapper.BuyerMapper;
 import ruslan.kovshar.model.dao.mapper.CheckMapper;
 import ruslan.kovshar.model.entity.Check;
 import ruslan.kovshar.model.entity.User;
@@ -9,7 +10,6 @@ import ruslan.kovshar.view.SQL;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class JdbcCheckDao implements CheckDao {
     private Connection connection;
@@ -37,7 +37,20 @@ public class JdbcCheckDao implements CheckDao {
 
     @Override
     public Check findById(Long id) {
-        return null;
+        Check check = null;
+        try (final PreparedStatement ps = connection.prepareStatement(SQL.SELECT_CHECK_BY_ID_WITH_BUYER)) {
+            ps.setLong(1, id);
+            final ResultSet resultSet = ps.executeQuery();
+            CheckMapper mapper = new CheckMapper();
+            BuyerMapper buyerMapper = new BuyerMapper();
+            while (resultSet.next()) {
+                check = mapper.extractFromResultSet(resultSet);
+                check.setBuyer(buyerMapper.extractFromResultSet(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return check;
     }
 
     @Override

@@ -5,6 +5,9 @@ public class Buyer {
     private String nameOnCard;
     private String cardNumber;
 
+    public Buyer() {
+    }
+
     public Buyer(String nameOnCard, String cardNumber) {
         this.nameOnCard = nameOnCard;
         this.cardNumber = cardNumber;
