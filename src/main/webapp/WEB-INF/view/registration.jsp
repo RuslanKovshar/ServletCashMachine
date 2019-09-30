@@ -1,3 +1,4 @@
+<%@ page import="ruslan.kovshar.view.Params" %>
 <%@include file="parts/header.jsp" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -12,7 +13,7 @@
 
     <c:if test="${requestScope.error != null}">
         <div class="alert alert-danger" role="alert">
-            User already created
+            <fmt:message key="user.with.email.message"/>email<%--<i>${createUserDTO.email}</i>--%> <fmt:message key="exist.message"/>
         </div>
     </c:if>
 
@@ -22,7 +23,7 @@
                class="form-control"
                id="InputEmail"
                placeholder="example@mail.com"
-               name=<%= RequestParams.EMAIL %>>
+               name=<%= Params.EMAIL %>>
         <%--value="<#if createUserDTO??>${createUserDTO.email}</#if>">--%>
         <%--    <#if emailError??>
             <div class="invalid-feedback">${emailError}</div>
@@ -36,7 +37,7 @@
                class="form-control"
                id="InputPassword"
                placeholder="Password"
-               name=<%= RequestParams.PASSWORD %>>
+               name=<%= Params.PASSWORD %>>
     </div>
 
     <div class="row">
@@ -46,7 +47,7 @@
                 <input id="InputFirstNameUA" type="text"
                        class="form-control"
                        placeholder="<fmt:message key="placeholder.for.second.name.message"/>"
-                       name=<%= RequestParams.FIRST_NAME_UA %>>
+                       name=<%= Params.FIRST_NAME_UA %>>
             </div>
         </div>
 
@@ -55,7 +56,7 @@
                 <label for="InputFirstNameEN"><fmt:message key="first.name.message"/>EN</label>
                 <input id="InputFirstNameEN" type="text"
                        class="form-control"
-                       name=<%= RequestParams.FIRST_NAME_EN %>
+                       name=<%= Params.FIRST_NAME_EN %>
                                placeholder="<fmt:message key="placeholder.for.first.name.message"/>">
             </div>
         </div>
@@ -67,7 +68,7 @@
                 <label for="InputSecondNameUA"><fmt:message key="second.name.message"/>UA</label>
                 <input id="InputSecondNameUA" type="text"
                        class="form-control"
-                       name=<%= RequestParams.SECOND_NAME_UA %>
+                       name=<%= Params.SECOND_NAME_UA %>
                                placeholder="<fmt:message key="placeholder.for.second.name.message"/>">
             </div>
         </div>
@@ -77,7 +78,7 @@
                 <label for="InputSecondNameEN"><fmt:message key="second.name.message"/>EN</label>
                 <input id="InputSecondNameEN" type="text"
                        class="form-control"
-                       name=<%= RequestParams.SECOND_NAME_EN %>
+                       name=<%= Params.SECOND_NAME_EN %>
                                placeholder="<fmt:message key="placeholder.for.second.name.message"/>">
             </div>
         </div>

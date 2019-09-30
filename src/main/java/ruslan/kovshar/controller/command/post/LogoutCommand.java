@@ -1,7 +1,7 @@
 package ruslan.kovshar.controller.command.post;
 
 import ruslan.kovshar.controller.command.Command;
-import ruslan.kovshar.view.RequestParams;
+import ruslan.kovshar.view.Params;
 import ruslan.kovshar.view.URI;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +12,6 @@ public class LogoutCommand implements Command {
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.invalidate();
-        return URI.REDIRECT + request.getServletPath() + URI.LOGIN + RequestParams.PARAM + RequestParams.LOGOUT;
+        return URI.REDIRECT + request.getServletPath() + URI.LOGIN + Params.PARAM + Params.LOGOUT;
     }
 }

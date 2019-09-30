@@ -3,7 +3,6 @@ package ruslan.kovshar.model.entity;
 import ruslan.kovshar.model.enums.Roles;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.util.Set;
 
@@ -18,18 +17,91 @@ public class User {
     private String secondNameEN;
     private Set<Roles> authorities;
     private Set<Check> checks;
-    private BigDecimal userMoney = BigDecimal.ZERO;
+    private BigDecimal userCash;
 
-    public User() {
+    public static class Builder {
+        private Long id;
+        private String email;
+        private String password;
+        private String firstNameUA;
+        private String secondNameUA;
+        private String firstNameEN;
+        private String secondNameEN;
+        private Set<Roles> authorities;
+        private Set<Check> checks;
+        private BigDecimal userCash;
+
+        public Builder() {
+            
+        }
+
+        public Builder id(Long val){
+            id = val;
+            return this;
+        }
+
+        public Builder email(String val){
+            email = val;
+            return this;
+        }
+
+        public Builder password(String val){
+            password = val;
+            return this;
+        }
+
+        public Builder firstNameUA(String val){
+            firstNameUA = val;
+            return this;
+        }
+
+        public Builder secondNameUA(String val){
+            secondNameUA = val;
+            return this;
+        }
+
+        public Builder firstNameEN(String val){
+            firstNameEN = val;
+            return this;
+        }
+
+        public Builder secondNameEN(String val){
+            secondNameEN = val;
+            return this;
+        }
+
+        public Builder authorities(Set<Roles> val){
+            authorities = val;
+            return this;
+        }
+
+        public Builder checks(Set<Check> val) {
+            checks = val;
+            return this;
+        }
+
+        public Builder userCash(BigDecimal val) {
+            userCash = val;
+            return this;
+        }
+
+        public User build(){
+            return new User(this);
+        }
+
     }
 
-    public User(String email, String password, String firstNameUA, String secondNameUA, String firstNameEN, String secondNameEN) {
-        this.email = email;
-        this.password = password;
-        this.firstNameUA = firstNameUA;
-        this.secondNameUA = secondNameUA;
-        this.firstNameEN = firstNameEN;
-        this.secondNameEN = secondNameEN;
+    private User(Builder builder) {
+       id = builder.id;
+       email = builder.email;
+       password = builder.password;
+       firstNameUA = builder.firstNameUA;
+       secondNameUA = builder.secondNameUA;
+       firstNameEN = builder.firstNameEN;
+       secondNameEN = builder.secondNameEN;
+       authorities = builder.authorities;
+       checks = builder.checks;
+       userCash = builder.userCash;
     }
 
     public Long getId() {
@@ -104,12 +176,12 @@ public class User {
         this.checks = checks;
     }
 
-    public BigDecimal getUserMoney() {
-        return userMoney;
+    public BigDecimal getUserCash() {
+        return userCash;
     }
 
-    public void setUserMoney(BigDecimal userMoney) {
-        this.userMoney = userMoney;
+    public void setUserCash(BigDecimal userCash) {
+        this.userCash = userCash;
     }
 
     public String i18nFirstName(HttpServletRequest request) {
@@ -141,4 +213,6 @@ public class User {
                 ", secondNameEN='" + secondNameEN + '\'' +
                 '}';
     }
+
+
 }

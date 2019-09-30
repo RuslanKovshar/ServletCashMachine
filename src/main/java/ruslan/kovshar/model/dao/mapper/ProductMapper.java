@@ -20,8 +20,7 @@ public class ProductMapper extends Mapper<Product> {
         }
         product.setId(rs.getLong("id"));
         product.setCode(rs.getInt("code"));
-        product.setNameEN(rs.getString("name_en"));
-        product.setNameUA(rs.getString("name_ua"));
+        product.setName(rs.getString("name"));
         product.setPrice(rs.getBigDecimal("price"));
         product.setType(type);
         return makeUnique(product, product.getId());

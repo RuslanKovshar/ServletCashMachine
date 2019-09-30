@@ -3,16 +3,17 @@ package ruslan.kovshar.model.dao.impl;
 import ruslan.kovshar.model.dao.ProductDao;
 import ruslan.kovshar.model.dao.mapper.ProductMapper;
 import ruslan.kovshar.model.entity.Product;
+import ruslan.kovshar.model.exceptions.ProductExistException;
 import ruslan.kovshar.view.SQL;
 
 import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
-public class JdbcProductDao implements ProductDao {
+public class JDBCProductDao implements ProductDao {
     private Connection connection;
 
-    public JdbcProductDao(Connection connection) {
+    public JDBCProductDao(Connection connection) {
         this.connection = connection;
     }
 
@@ -21,10 +22,9 @@ public class JdbcProductDao implements ProductDao {
         try (PreparedStatement ps =
                      connection.prepareStatement(SQL.INSERT_NEW_PRODUCT, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, entity.getCode());
-            ps.setString(2, entity.getNameEN());
-            ps.setString(3, entity.getNameUA());
-            ps.setBigDecimal(4, entity.getPrice());
-            ps.setString(5, entity.getType().name());
+            ps.setString(2, entity.getName());
+            ps.setBigDecimal(3, entity.getPrice());
+            ps.setString(4, entity.getType().name());
             ps.executeUpdate();
 
             ResultSet generatedKeys = ps.getGeneratedKeys();
@@ -33,6 +33,7 @@ public class JdbcProductDao implements ProductDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new ProductExistException();
         }
 
     }
@@ -87,7 +88,6 @@ public class JdbcProductDao implements ProductDao {
         Optional<Product> result = Optional.empty();
         try (final PreparedStatement ps = connection.prepareStatement(SQL.SELECT_PRODUCT_BY_NAME)) {
             ps.setString(1, name);
-            ps.setString(2, name);
             final ResultSet resultSet = ps.executeQuery();
             ProductMapper mapper = new ProductMapper();
             while (resultSet.next()) {

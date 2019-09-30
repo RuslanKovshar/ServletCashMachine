@@ -5,42 +5,39 @@ import ruslan.kovshar.controller.security.Encoder;
 import ruslan.kovshar.model.entity.User;
 import ruslan.kovshar.model.enums.Roles;
 import ruslan.kovshar.model.service.UserService;
-import ruslan.kovshar.view.RequestParams;
+import ruslan.kovshar.view.Params;
 import ruslan.kovshar.view.URI;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 
 public class RegistrationCommand implements Command {
 
-    private UserService userService;
-
-    public RegistrationCommand(UserService userService) {
-        this.userService = userService;
-    }
+    private UserService userService = UserService.getInstance();
 
     @Override
     public String execute(HttpServletRequest request) {
-        String email        = request.getParameter(RequestParams.EMAIL);
-        String password     = request.getParameter(RequestParams.PASSWORD);
-        String firstNameUA  = request.getParameter(RequestParams.FIRST_NAME_UA);
-        String secondNameUA = request.getParameter(RequestParams.SECOND_NAME_UA);
-        String firstNameEN  = request.getParameter(RequestParams.FIRST_NAME_EN);
-        String secondNameEN = request.getParameter(RequestParams.SECOND_NAME_EN);
+        String email = request.getParameter(Params.EMAIL);
+        String password = request.getParameter(Params.PASSWORD);
+        String firstNameUA = request.getParameter(Params.FIRST_NAME_UA);
+        String secondNameUA = request.getParameter(Params.SECOND_NAME_UA);
+        String firstNameEN = request.getParameter(Params.FIRST_NAME_EN);
+        String secondNameEN = request.getParameter(Params.SECOND_NAME_EN);
 
-        User user = new User(email,
-                Encoder.encodePassword(password),
-                firstNameUA,
-                secondNameUA,
-                firstNameEN,
-                secondNameEN);
+        User user = new User.Builder()
+                .email(email)
+                .password(Encoder.encodePassword(password))
+                .firstNameUA(firstNameUA)
+                .firstNameEN(firstNameEN)
+                .secondNameUA(secondNameUA)
+                .secondNameEN(secondNameEN)
+                .userCash(BigDecimal.ZERO)
+                .build();
 
-        try {
-            userService.addUser(user, Roles.CASHIER);
-
-            return URI.REDIRECT + request.getServletPath() + URI.REGISTRATION + RequestParams.PARAM + RequestParams.SUCCESS;
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-            return URI.REDIRECT + request.getServletPath() + URI.REGISTRATION + RequestParams.PARAM + RequestParams.ERROR;
+        if (userService.addUser(user, Roles.CASHIER)) {
+            return URI.REDIRECT + request.getServletPath() + URI.REGISTRATION + Params.PARAM + Params.SUCCESS;
+        } else {
+            return URI.REDIRECT + request.getServletPath() + URI.REGISTRATION + Params.PARAM + Params.ERROR;
         }
     }
 }

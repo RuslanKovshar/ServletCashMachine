@@ -1,35 +1,54 @@
 package ruslan.kovshar.model.service;
 
 import ruslan.kovshar.model.dao.DaoFactory;
-import ruslan.kovshar.model.dao.MoneyDao;
 import ruslan.kovshar.model.dao.RoleDao;
 import ruslan.kovshar.model.dao.UserDao;
 import ruslan.kovshar.model.entity.User;
 import ruslan.kovshar.model.enums.Roles;
+import ruslan.kovshar.model.exceptions.UserExistException;
 
-import java.math.BigDecimal;
 import java.util.Optional;
-import java.util.Set;
 
 public class UserService {
 
+    private static UserService instance;
     private DaoFactory daoFactory = DaoFactory.getInstance();
 
-    public void addUser(User user, Roles role) {
+    private UserService() {
+    }
+
+    public static UserService getInstance() {
+        if (instance == null) {
+            synchronized (UserService.class) {
+                if (instance == null) {
+                    instance = new UserService();
+                }
+            }
+        }
+        return instance;
+    }
+
+    public boolean addUser(User user, Roles role) {
         try (UserDao userDao = daoFactory.createUserDao();
-             RoleDao roleDao = daoFactory.createRoleDao();
-             MoneyDao moneyDao = daoFactory.createMoneyDao()) {
+             RoleDao roleDao = daoFactory.createRoleDao()) {
             userDao.create(user);
             roleDao.setUserRole(user, role);
-            moneyDao.setUserMoney(user, BigDecimal.ZERO);
-        } catch (Exception e) {
+            return true;
+        } catch (UserExistException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     public Optional<User> getUser(String email, String password) {
         try (UserDao userDao = daoFactory.createUserDao()) {
             return userDao.findByEmailAndPassword(email, password);
+        }
+    }
+
+    public void updateUser(User user) {
+        try(UserDao userDao = daoFactory.createUserDao()) {
+            userDao.update(user);
         }
     }
 }

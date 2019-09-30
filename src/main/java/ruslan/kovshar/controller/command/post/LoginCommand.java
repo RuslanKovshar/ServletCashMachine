@@ -3,9 +3,8 @@ package ruslan.kovshar.controller.command.post;
 import ruslan.kovshar.controller.command.Command;
 import ruslan.kovshar.controller.security.Encoder;
 import ruslan.kovshar.model.entity.User;
-import ruslan.kovshar.model.service.RoleService;
 import ruslan.kovshar.model.service.UserService;
-import ruslan.kovshar.view.RequestParams;
+import ruslan.kovshar.view.Params;
 import ruslan.kovshar.view.URI;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,30 +13,29 @@ import java.util.Optional;
 
 public class LoginCommand implements Command {
 
-    private UserService userService;
-    private RoleService roleService;
-
-    public LoginCommand(UserService userService, RoleService roleService) {
-        this.userService = userService;
-        this.roleService = roleService;
-    }
+    private UserService userService = UserService.getInstance();
 
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        String email = request.getParameter(RequestParams.EMAIL);
-        String password = request.getParameter(RequestParams.PASSWORD);
+        String email = request.getParameter(Params.EMAIL);
+        String password = request.getParameter(Params.PASSWORD);
         Optional<User> checkUserForLogin = userService.getUser(email, Encoder.encodePassword(password));
         if (checkUserForLogin.isPresent()) {
             User user = checkUserForLogin.get();
-            user.setAuthorities(roleService.getUserRoles(user));
+
+            System.out.println(user.getAuthorities());
+
             session.setAttribute("user", user);
+
             String redirect = (String) session.getAttribute("redirectURI");
-            if (redirect.equals("/")) redirect = URI.API + URI.HOME;
+
+            if (redirect == null || redirect.equals("/")) redirect = URI.API + URI.HOME;
+
             session.removeAttribute("redirectURI");
             return URI.REDIRECT + redirect;
         } else {
-            return URI.REDIRECT + request.getServletPath() + URI.LOGIN + RequestParams.PARAM + RequestParams.ERROR;
+            return URI.REDIRECT + request.getServletPath() + URI.LOGIN + Params.PARAM + Params.ERROR;
         }
     }
 }

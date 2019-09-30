@@ -1,14 +1,13 @@
 <%@include file="parts/header.jsp" %>
 
 <form action="${pageContext.request.contextPath}/api/check/product" method="post" class="form-group">
-
     <label for="inputName"><fmt:message key="input.code.or.name.message"/></label>
     <div class="row">
         <div class="col-8">
-            <input id="inputName" type="text" name="name" class="form-control <%--<#if notFound>is-invalid</#if>--%>">
-            <%--            <#if notFound>
-                        <div class="invalid-feedback"><fmt:message key="product.not.found.message"/></div>
-                    </#if>--%>
+            <input id="inputName" type="text" name="name" class="form-control <c:if test="${requestScope.error}">is-invalid</c:if>">
+            <c:if test="${requestScope.error}">
+                <div class="invalid-feedback"><fmt:message key="product.not.found.message"/></div>
+            </c:if>
         </div>
         <div class="col-4">
             <button class="btn btn-success btn-block"><fmt:message key="search.product.message"/></button>
@@ -30,12 +29,12 @@
             <td>
                 <div class="row">
                     <div class="col">
-                            ${productInCheck.product.nameUA}
+                            ${productInCheck.product.name}
                     </div>
                     <div class="col">
                         <c:if test="${sessionScope.user.isSeniorCashier()}">
                             <form action="${pageContext.request.contextPath}/api/check/remove_product" method="post">
-                                <input type="hidden" value="${productInCheck.product.nameUA}" name="name">
+                                <input type="hidden" value="${productInCheck.product.name}" name="name">
                                 <button type="submit" class="btn btn-small btn-danger">
                                     <fmt:message key="remove.product.message"/>
                                 </button>

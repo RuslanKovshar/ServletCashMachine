@@ -6,7 +6,7 @@ import ruslan.kovshar.model.entity.Product;
 import ruslan.kovshar.model.entity.ProductInCheck;
 import ruslan.kovshar.model.exceptions.TransactionException;
 import ruslan.kovshar.model.service.StockService;
-import ruslan.kovshar.view.RequestParams;
+import ruslan.kovshar.view.Params;
 import ruslan.kovshar.view.URI;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +15,7 @@ import java.util.Optional;
 
 public class CheckAddProduct implements Command {
 
-    private StockService stockService;
-
-    public CheckAddProduct(StockService stockService) {
-        this.stockService = stockService;
-    }
+    private StockService stockService = StockService.getInstance();
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -32,7 +28,7 @@ public class CheckAddProduct implements Command {
             stockService.updateStock(product, value);
         } catch (TransactionException e) {
             //log.error(TRANSACTION_ERROR);
-            return URI.REDIRECT + request.getServletPath() + URI.CHECK + URI.PRODUCT + RequestParams.PARAM + RequestParams.ERROR;
+            return URI.REDIRECT + request.getServletPath() + URI.CHECK + URI.PRODUCT + Params.PARAM + Params.ERROR;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -52,7 +48,7 @@ public class CheckAddProduct implements Command {
             check.getProducts().add(newProduct);
         }
 
-        check.setTotalPrice(check.getTotalPrice().add(product.calculatePrice(value)));
+        check.calculateTotalPrice();
         session.removeAttribute("product");
         return URI.REDIRECT + request.getServletPath() + URI.CHECK;
     }

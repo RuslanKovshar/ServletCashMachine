@@ -13,9 +13,9 @@ import java.math.BigDecimal;
 
 public class CancelCheckCommand implements Command {
 
-    private CheckService checkService = new CheckService();
-    private StockService stockService = new StockService();
-    private PaymentService paymentService = new PaymentService();
+    private CheckService checkService = CheckService.getInstance();
+    private StockService stockService = StockService.getInstance();
+    private PaymentService paymentService = PaymentService.getInstance();
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -29,7 +29,8 @@ public class CancelCheckCommand implements Command {
                 e.printStackTrace();
             }
         });
-        paymentService.returnMoney(user, check.getTotalPrice().multiply(BigDecimal.valueOf(-1)));
+        user.setUserCash(user.getUserCash().subtract(check.getTotalPrice().multiply(BigDecimal.valueOf(-1))));
+        paymentService.returnMoney(user);
         checkService.deleteCheck(check);
         return URI.REDIRECT + request.getServletPath() + "/";
     }

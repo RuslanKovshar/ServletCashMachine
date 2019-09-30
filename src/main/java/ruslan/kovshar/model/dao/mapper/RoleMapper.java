@@ -1,7 +1,6 @@
 package ruslan.kovshar.model.dao.mapper;
 
 import ruslan.kovshar.model.enums.Roles;
-import ruslan.kovshar.model.enums.Types;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -17,7 +17,7 @@ public class JDBCBuyerDao implements BuyerDao {
 
     @Override
     public void create(Buyer entity) {
-        try (final PreparedStatement ps = connection.prepareStatement(SQL.INSERT_NEW_BUYER, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement ps = connection.prepareStatement(SQL.INSERT_NEW_BUYER, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, entity.getNameOnCard());
             ps.setString(2, entity.getCardNumber());
             ps.executeUpdate();
@@ -48,7 +48,12 @@ public class JDBCBuyerDao implements BuyerDao {
 
     @Override
     public void delete(Long id) {
-
+        try (PreparedStatement ps = connection.prepareStatement(SQL.DELETE_BUYER)) {
+            ps.setLong(1, id);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -1,11 +1,11 @@
 package ruslan.kovshar.view;
 
-public interface RequestParams {
+public interface Params {
     String PARAM = "?";
     String SLASH = "/";
     String ERROR = "error";
     String LOGOUT = "logout";
-    String NOT_FOUND = "notFound";
+
     String SUCCESS = "success";
     String ID_PARAM = "id";
 
@@ -16,8 +16,6 @@ public interface RequestParams {
     String FIRST_NAME_EN = "firstNameEN";
     String SECOND_NAME_EN = "secondNameEN";
 
-    String NAME_UA = "nameUA";
-    String NAME_EN = "nameEN";
     String CODE = "code";
     String PRICE = "price";
     String COUNT_ON_STOCK = "count";
@@ -27,4 +25,7 @@ public interface RequestParams {
     String NAME_ON_CARD = "nameOnCard";
     String CARD_NUMBER = "cardNumber";
     String VALUE = "value";
+
+    String PRODUCT_EXIST = "productExist";
+    String PRODUCT_NOT_FOUND = "productNotFound";
 }

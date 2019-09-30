@@ -5,16 +5,17 @@ import ruslan.kovshar.model.dao.mapper.BuyerMapper;
 import ruslan.kovshar.model.dao.mapper.CheckMapper;
 import ruslan.kovshar.model.entity.Check;
 import ruslan.kovshar.model.entity.User;
+import ruslan.kovshar.model.pagination.Page;
 import ruslan.kovshar.view.SQL;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JdbcCheckDao implements CheckDao {
+public class JDBCCheckDao implements CheckDao {
     private Connection connection;
 
-    public JdbcCheckDao(Connection connection) {
+    public JDBCCheckDao(Connection connection) {
         this.connection = connection;
     }
 
@@ -99,14 +100,49 @@ public class JdbcCheckDao implements CheckDao {
             ps.setLong(1, user.getId());
             final ResultSet resultSet = ps.executeQuery();
             CheckMapper mapper = new CheckMapper();
+            BuyerMapper buyerMapper = new BuyerMapper();
             while (resultSet.next()) {
                 Check check = mapper.extractFromResultSet(resultSet);
                 check.setUser(user);
+                check.setBuyer(buyerMapper.extractFromResultSet(resultSet));
                 checks.add(check);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return checks;
+    }
+
+    @Override
+    public Page<Check> findPageAllByUser(User user, Page pageInfo) {
+        Page<Check> page = new Page<>();
+        try (PreparedStatement countOfChecksStatement = connection.prepareStatement(SQL.COUNT_OF_CHECKS);
+             PreparedStatement checksOnPageStatement = connection.prepareStatement("SELECT * FROM checks " +
+                     "JOIN buyer_info ON checks.buyer_id = buyer_info.id " +
+                     "WHERE checks.user_id = ? " +
+                     "ORDER BY checks.id " + pageInfo.getSortType() +
+                     " LIMIT " + (pageInfo.getCurrentPage() - 1) * pageInfo.getMaxResult() + "," + pageInfo.getMaxResult())) {
+
+            countOfChecksStatement.setLong(1, user.getId());
+            ResultSet countOfCheckResultSet = countOfChecksStatement.executeQuery();
+            if (countOfCheckResultSet.next()) {
+                int countOfChecks = countOfCheckResultSet.getInt(1);
+                page.setTotalPages((int) Math.ceil((double) countOfChecks / pageInfo.getMaxResult()));
+            }
+
+            checksOnPageStatement.setLong(1, user.getId());
+            ResultSet checksOnPageResultSet = checksOnPageStatement.executeQuery();
+            CheckMapper mapper = new CheckMapper();
+            BuyerMapper buyerMapper = new BuyerMapper();
+            while (checksOnPageResultSet.next()) {
+                Check check = mapper.extractFromResultSet(checksOnPageResultSet);
+                check.setUser(user);
+                check.setBuyer(buyerMapper.extractFromResultSet(checksOnPageResultSet));
+                page.getContent().add(check);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return page;
     }
 }

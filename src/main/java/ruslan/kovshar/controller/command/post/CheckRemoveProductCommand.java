@@ -2,11 +2,10 @@ package ruslan.kovshar.controller.command.post;
 
 import ruslan.kovshar.controller.command.Command;
 import ruslan.kovshar.model.entity.Check;
-import ruslan.kovshar.model.entity.Product;
 import ruslan.kovshar.model.entity.ProductInCheck;
 import ruslan.kovshar.model.exceptions.TransactionException;
 import ruslan.kovshar.model.service.StockService;
-import ruslan.kovshar.view.RequestParams;
+import ruslan.kovshar.view.Params;
 import ruslan.kovshar.view.URI;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +14,7 @@ import java.util.Optional;
 
 public class CheckRemoveProductCommand implements Command {
 
-    private StockService stockService;
-
-    public CheckRemoveProductCommand(StockService stockService) {
-        this.stockService = stockService;
-    }
+    private StockService stockService = StockService.getInstance();
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -29,7 +24,7 @@ public class CheckRemoveProductCommand implements Command {
 
         Optional<ProductInCheck> productInCheck = check.getProducts()
                 .stream()
-                .filter(s -> s.getProduct().getNameUA().equals(name))
+                .filter(s -> s.getProduct().getName().equals(name))
                 .findAny();
 
         if (productInCheck.isPresent()) {
@@ -39,7 +34,7 @@ public class CheckRemoveProductCommand implements Command {
                 stockService.updateStock(checkProduct.getProduct(), -checkProduct.getValue());
             } catch (TransactionException e) {
                 //log.error(TRANSACTION_ERROR);
-                return URI.REDIRECT + request.getServletPath() + URI.CHECK + URI.PRODUCT + RequestParams.PARAM + RequestParams.ERROR;
+                return URI.REDIRECT + request.getServletPath() + URI.CHECK + URI.PRODUCT + Params.PARAM + Params.ERROR;
             } catch (Exception e) {
                 e.printStackTrace();
             }

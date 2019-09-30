@@ -9,8 +9,7 @@ public abstract class Product {
 
     protected Long id;
     protected Integer code;
-    protected String nameUA;
-    protected String nameEN;
+    protected String name;
     protected BigDecimal price;
     protected Types type;
 
@@ -19,10 +18,9 @@ public abstract class Product {
     public Product() {
     }
 
-    public Product(Integer code, String nameUA, String nameEN, BigDecimal price, Types type) {
+    public Product(Integer code, String name, BigDecimal price, Types type) {
         this.code = code;
-        this.nameUA = nameUA;
-        this.nameEN = nameEN;
+        this.name = name;
         this.price = price;
         this.type = type;
     }
@@ -43,20 +41,12 @@ public abstract class Product {
         this.code = code;
     }
 
-    public String getNameUA() {
-        return nameUA;
+    public String getName() {
+        return name;
     }
 
-    public void setNameUA(String nameUA) {
-        this.nameUA = nameUA;
-    }
-
-    public String getNameEN() {
-        return nameEN;
-    }
-
-    public void setNameEN(String nameEN) {
-        this.nameEN = nameEN;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public BigDecimal getPrice() {
@@ -80,17 +70,16 @@ public abstract class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(id, product.id) &&
-                Objects.equals(code, product.code) &&
-                Objects.equals(nameUA, product.nameUA) &&
-                Objects.equals(nameEN, product.nameEN) &&
-                Objects.equals(price, product.price) &&
+        return id.equals(product.id) &&
+                code.equals(product.code) &&
+                name.equals(product.name) &&
+                price.equals(product.price) &&
                 type == product.type;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, code, nameUA, nameEN, price, type);
+        return Objects.hash(id, code, name, price, type);
     }
 
     @Override
@@ -98,8 +87,7 @@ public abstract class Product {
         return "Product{" +
                 "id=" + id +
                 ", code=" + code +
-                ", nameUA='" + nameUA + '\'' +
-                ", nameEN='" + nameEN + '\'' +
+                ", name='" + name + '\'' +
                 ", price=" + price +
                 ", type=" + type +
                 '}';

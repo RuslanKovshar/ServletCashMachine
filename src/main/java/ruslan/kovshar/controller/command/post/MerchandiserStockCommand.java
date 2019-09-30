@@ -4,32 +4,23 @@ import ruslan.kovshar.controller.command.Command;
 import ruslan.kovshar.model.entity.Product;
 import ruslan.kovshar.model.service.ProductService;
 import ruslan.kovshar.model.service.StockService;
-import ruslan.kovshar.view.Pages;
-import ruslan.kovshar.view.RequestParams;
+import ruslan.kovshar.model.validator.Validator;
+import ruslan.kovshar.view.Params;
 import ruslan.kovshar.view.URI;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class MerchandiserStockCommand implements Command {
 
-    private ProductService productService;
-    private StockService stockService;
-
-    public MerchandiserStockCommand(ProductService productService, StockService stockService) {
-        this.productService = productService;
-        this.stockService = stockService;
-    }
+    private ProductService productService = ProductService.getInstance();
+    private StockService stockService = StockService.getInstance();
 
     @Override
     public String execute(HttpServletRequest request) {
-        final String name = request.getParameter(RequestParams.NAME);
-        final String count = request.getParameter(RequestParams.COUNT_ON_STOCK);
+        final String name = request.getParameter(Params.NAME);
+        final String count = request.getParameter(Params.COUNT_ON_STOCK);
 
-        Integer code = null;
-        try {
-            code = Integer.parseInt(name);
-        } catch (NumberFormatException ignored) {
-        }
+        Integer code = Validator.integerValidator(name);
 
         Product product;
         try {
@@ -41,6 +32,7 @@ public class MerchandiserStockCommand implements Command {
             stockService.updateStock(product, -Integer.parseInt(count));
         } catch (Exception e) {
             e.printStackTrace();
+            return URI.REDIRECT + request.getServletPath() + URI.MERCHANDISER + Params.PARAM + Params.PRODUCT_NOT_FOUND;
         }
 
         return URI.REDIRECT + request.getServletPath() + URI.MERCHANDISER;

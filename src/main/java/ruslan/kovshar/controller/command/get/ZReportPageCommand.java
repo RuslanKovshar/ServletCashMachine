@@ -4,22 +4,21 @@ import ruslan.kovshar.controller.command.Command;
 import ruslan.kovshar.model.entity.Check;
 import ruslan.kovshar.model.entity.User;
 import ruslan.kovshar.model.service.CheckService;
+import ruslan.kovshar.model.service.UserService;
 import ruslan.kovshar.view.Pages;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
 public class ZReportPageCommand implements Command {
 
-    private CheckService checkService;
-
-    public ZReportPageCommand(CheckService checkService) {
-        this.checkService = checkService;
-    }
+    private CheckService checkService = CheckService.getInstance();
+    private UserService userService = UserService.getInstance();
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -28,6 +27,9 @@ public class ZReportPageCommand implements Command {
 
         int countOfChecks = allChecks.size();
         double totalMoney = allChecks.stream().mapToDouble(s -> s.getTotalPrice().doubleValue()).sum();
+
+        request.setAttribute("count", countOfChecks);
+        request.setAttribute("TOTAL_SUM", totalMoney);
 
         try (FileWriter fileWriter = new FileWriter("C:\\REPORTS\\" + LocalDate.now() + ".txt")) {
             fileWriter.write("Z-Order from: " + LocalTime.now().toString() + System.lineSeparator());
@@ -38,13 +40,9 @@ public class ZReportPageCommand implements Command {
             e.printStackTrace();
         }
 
-
-        request.setAttribute("count", allChecks.size());
-        double sum = allChecks.stream().mapToDouble(s -> s.getTotalPrice().doubleValue()).sum();
-        request.setAttribute("TOTAL_SUM", sum);
-        request.setAttribute("ENTITY_ID", user.getId());
-
         allChecks.forEach(checkService::deleteCheck);
+        user.setUserCash(user.getUserCash().subtract(BigDecimal.valueOf(totalMoney)));
+        userService.updateUser(user);
         return Pages.Z_REPORT_PAGE;
     }
 }

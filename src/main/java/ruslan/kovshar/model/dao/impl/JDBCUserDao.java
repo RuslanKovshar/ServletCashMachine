@@ -1,8 +1,10 @@
 package ruslan.kovshar.model.dao.impl;
 
 import ruslan.kovshar.model.dao.UserDao;
+import ruslan.kovshar.model.dao.mapper.RoleMapper;
 import ruslan.kovshar.model.dao.mapper.UserMapper;
 import ruslan.kovshar.model.entity.User;
+import ruslan.kovshar.model.exceptions.UserExistException;
 import ruslan.kovshar.view.SQL;
 
 import java.sql.*;
@@ -10,10 +12,10 @@ import java.util.List;
 import java.util.Optional;
 
 
-public class JdbcUserDao implements UserDao {
+public class JDBCUserDao implements UserDao {
     private Connection connection;
 
-    public JdbcUserDao(Connection connection) {
+    public JDBCUserDao(Connection connection) {
         this.connection = connection;
     }
 
@@ -24,10 +26,18 @@ public class JdbcUserDao implements UserDao {
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
+
+            User user = null;
             UserMapper userMapper = new UserMapper();
-            if (resultSet.next()) {
-                result = Optional.of(userMapper.extractFromResultSet(resultSet));
+            RoleMapper roleMapper = new RoleMapper();
+
+            while (resultSet.next()) {
+                user = userMapper.extractFromResultSet(resultSet);
+                if (user != null) {
+                    user.getAuthorities().add(roleMapper.extractFromResultSet(resultSet));
+                }
             }
+            result = Optional.ofNullable(user);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -52,7 +62,7 @@ public class JdbcUserDao implements UserDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException();
+            throw new UserExistException();
         }
     }
 
@@ -68,7 +78,20 @@ public class JdbcUserDao implements UserDao {
 
     @Override
     public void update(User entity) {
-
+        try (PreparedStatement preparedStatement =
+                     connection.prepareStatement(SQL.UPDATE_USER)) {
+            preparedStatement.setString(1, entity.getEmail());
+            preparedStatement.setString(2, entity.getPassword());
+            preparedStatement.setString(3, entity.getFirstNameUA());
+            preparedStatement.setString(4, entity.getSecondNameUA());
+            preparedStatement.setString(5, entity.getFirstNameEN());
+            preparedStatement.setString(6, entity.getSecondNameEN());
+            preparedStatement.setBigDecimal(7, entity.getUserCash());
+            preparedStatement.setLong(8, entity.getId());
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

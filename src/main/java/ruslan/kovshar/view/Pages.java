@@ -10,7 +10,7 @@ public interface Pages {
     String CHECK_PAGE = WEB_INF + "check" + JSP;
     String PRODUCT_PAGE = WEB_INF + "product" + JSP;
     String REGISTRATION_PAGE = WEB_INF + "registration" + JSP;
-    String X_REPORT_PAGE = WEB_INF + "x-report" + JSP;
+    String X_REPORT_PAGE = WEB_INF + "x_report" + JSP;
     String Z_REPORT_PAGE = WEB_INF + "z_report" + JSP;
     String ERROR_404_PAGE = WEB_INF + "404" + JSP;
     String PAYING_PAGE = WEB_INF + "pay_check" + JSP;

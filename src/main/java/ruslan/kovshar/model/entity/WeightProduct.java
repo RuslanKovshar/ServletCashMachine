@@ -14,7 +14,7 @@ public class WeightProduct extends Product {
     public WeightProduct() {
     }
 
-    public WeightProduct(Integer code, String nameUA, String nameEN, BigDecimal price, Types type) {
-        super(code, nameUA, nameEN, price, type);
+    public WeightProduct(Integer code, String name, BigDecimal price, Types type) {
+        super(code, name, price, type);
     }
 }

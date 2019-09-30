@@ -27,7 +27,7 @@
                         <div class="row ">
                             <div class="col-md-12">
                                 <input type="text" class="form-control" placeholder="Enter Card Number"
-                                       name="<%= RequestParams.CARD_NUMBER %>">
+                                       name="<%= Params.CARD_NUMBER %>">
                             </div>
                         </div>
 
@@ -53,7 +53,7 @@
                         <div class="row ">
                             <div class="col-md-12 pad-adjust">
                                 <input type="text" class="form-control" placeholder="Name On The Card"
-                                       name="<%= RequestParams.NAME_ON_CARD %>">
+                                       name="<%= Params.NAME_ON_CARD %>">
                             </div>
                         </div>
 
@@ -64,7 +64,7 @@
                                        class="form-control"
                                        value="${param.value}"
                                        readonly
-                                       name="<%= RequestParams.VALUE %>">
+                                       name="<%= Params.VALUE %>">
                                 <input type="submit" class="btn btn-warning btn-block mt-3" value="PAY NOW"/>
 
                             </div>

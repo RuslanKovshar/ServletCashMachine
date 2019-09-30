@@ -6,7 +6,7 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class JdbcDaoFactory extends DaoFactory {
+public class JDBCDaoFactory extends DaoFactory {
 
     private DataSource dataSource = ConnectionPoolHolder.getDataSource();
 
@@ -20,27 +20,27 @@ public class JdbcDaoFactory extends DaoFactory {
 
     @Override
     public CheckDao createCheckDao() {
-        return new JdbcCheckDao(getConnection());
+        return new JDBCCheckDao(getConnection());
     }
 
     @Override
     public ProductDao createProductDao() {
-        return new JdbcProductDao(getConnection());
+        return new JDBCProductDao(getConnection());
     }
 
     @Override
     public RoleDao createRoleDao() {
-        return new JdbcRoleDao(getConnection());
+        return new JDBCRoleDao(getConnection());
     }
 
     @Override
     public StockDao createStockDao() {
-        return new JdbcStockDao(getConnection());
+        return new JDBCStockDao(getConnection());
     }
 
     @Override
     public UserDao createUserDao() {
-        return new JdbcUserDao(getConnection());
+        return new JDBCUserDao(getConnection());
     }
 
     @Override
@@ -51,10 +51,5 @@ public class JdbcDaoFactory extends DaoFactory {
     @Override
     public BuyerDao createBuyerDao() {
         return new JDBCBuyerDao(getConnection());
-    }
-
-    @Override
-    public MoneyDao createMoneyDao() {
-        return new JDBCMoneyDao(getConnection());
     }
 }

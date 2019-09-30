@@ -7,5 +7,4 @@ import java.util.Set;
 
 public interface RoleDao extends GenericDao<Roles> {
     void setUserRole(User user, Roles role);
-    Set<Roles> findByUserId(User user);
 }

@@ -22,28 +22,7 @@ public class Servlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        commands.put(TextConstants.POST + URI.LOGIN, new LoginCommand(new UserService(), new RoleService()));
-        commands.put(TextConstants.POST + URI.REGISTRATION, new RegistrationCommand(new UserService()));
-        commands.put(TextConstants.POST + URI.LOGOUT, new LogoutCommand());
-        commands.put(TextConstants.POST + URI.MERCHANDISER + URI.PRODUCT, new MerchandiserProductCommand(new ProductService(), new StockService()));
-        commands.put(TextConstants.POST + URI.MERCHANDISER + URI.STOCK, new MerchandiserStockCommand(new ProductService(), new StockService()));
-        commands.put(TextConstants.POST + URI.OPEN_CHECK, new OpenCheckCommand());
-        commands.put(TextConstants.POST + URI.CHECK + URI.PRODUCT, new CheckProductCommand(new ProductService()));
-        commands.put(TextConstants.POST + URI.CHECK + URI.ADD_PRODUCT, new CheckAddProduct(new StockService()));
-        commands.put(TextConstants.POST + URI.CLOSE_CHECK, new CloseCheckCommand());
-        commands.put(TextConstants.POST + URI.CHECK + URI.REMOVE_PRODUCT, new CheckRemoveProductCommand(new StockService()));
-        commands.put(TextConstants.POST + URI.PAYMENT,new PaymentCommand());
-        commands.put(TextConstants.POST + URI.CANCEL_CHECK,new CancelCheckCommand());
-
-        commands.put(TextConstants.GET + URI.CHECKS,new AllChecksPageCommand(new CheckService()));
-        commands.put(TextConstants.GET + URI.PAYMENT, new PayingPageCommand());
-        commands.put(TextConstants.GET + URI.MERCHANDISER, new MerchandiserPageCommand());
-        commands.put(TextConstants.GET + URI.HOME, new HomePageCommand());
-        commands.put(TextConstants.GET + URI.LOGIN, new LoginPageCommand());
-        commands.put(TextConstants.GET + URI.REGISTRATION, new RegistrationPageCommand());
-        commands.put(TextConstants.GET + URI.CHECK, new CheckPageCommand());
-        commands.put(TextConstants.GET + URI.CHECK + URI.PRODUCT, new CheckProductPageCommand());
-        commands.put(TextConstants.GET + URI.Z_REPORT, new ZReportPageCommand(new CheckService()));
+        CommandHolder.init(commands);
     }
 
     @Override

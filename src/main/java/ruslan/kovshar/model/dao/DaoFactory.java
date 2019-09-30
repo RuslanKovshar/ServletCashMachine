@@ -1,6 +1,6 @@
 package ruslan.kovshar.model.dao;
 
-import ruslan.kovshar.model.dao.impl.JdbcDaoFactory;
+import ruslan.kovshar.model.dao.impl.JDBCDaoFactory;
 
 public abstract class DaoFactory {
     private static volatile DaoFactory daoFactory;
@@ -19,13 +19,11 @@ public abstract class DaoFactory {
 
     public abstract BuyerDao createBuyerDao();
 
-    public abstract MoneyDao createMoneyDao();
-
     public static DaoFactory getInstance() {
         if (daoFactory == null) {
             synchronized (DaoFactory.class) {
                 if (daoFactory == null) {
-                    daoFactory = new JdbcDaoFactory();
+                    daoFactory = new JDBCDaoFactory();
                 }
             }
         }

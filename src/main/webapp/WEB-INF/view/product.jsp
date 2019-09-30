@@ -7,7 +7,7 @@
             <h2><em><fmt:message key="name.message"/></em></h2>
         </div>
         <div class="col-8">
-            <h2>${sessionScope.product.nameEN}</h2>
+            <h2>${sessionScope.product.name}</h2>
         </div>
     </div>
 
@@ -32,18 +32,18 @@
         <label for="inputNumber"><fmt:message key="input.weight.message"/></label>
     </c:if>
 
-<div class="row">
-    <div class="col-8">
-        <input type="number" id="inputNumber" name="number" min="1" required
-               class="form-control <%--<#if error>is-invalid</#if>--%>">
-        <%--<#if error>
-        <div class="invalid-feedback"><fmt:message key="not.enough.product.message"/></div>
-    </#if>--%>
+    <div class="row">
+        <div class="col-8">
+            <input type="number" id="inputNumber" name="number" min="1" required
+                   class="form-control <c:if test="${requestScope.error}">is-invalid</c:if>">
+            <c:if test="${requestScope.error}">
+                <div class="invalid-feedback"><fmt:message key="not.enough.product.message"/></div>
+            </c:if>
+        </div>
+        <div class="col-4">
+            <button class="btn btn-success btn-block"><fmt:message key="add.product.message"/></button>
+        </div>
     </div>
-    <div class="col-4">
-        <button class="btn btn-success btn-block"><fmt:message key="add.product.message"/></button>
-    </div>
-</div>
 </form>
 
 <%@include file="parts/footer.jsp" %>

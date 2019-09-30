@@ -10,10 +10,10 @@ import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
-public class JdbcStockDao implements StockDao {
+public class JDBCStockDao implements StockDao {
     private Connection connection;
 
-    public JdbcStockDao(Connection connection) {
+    public JDBCStockDao(Connection connection) {
         this.connection = connection;
     }
 

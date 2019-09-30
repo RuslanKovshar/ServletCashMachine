@@ -11,7 +11,22 @@ import static ruslan.kovshar.view.ExceptionMessages.STOCK_NOT_FOUND;
 
 public class StockService {
 
+    private static StockService instance;
     private DaoFactory daoFactory = DaoFactory.getInstance();
+
+    private StockService() {
+    }
+
+    public static StockService getInstance() {
+        if (instance == null) {
+            synchronized (UserService.class) {
+                if (instance == null) {
+                    instance = new StockService();
+                }
+            }
+        }
+        return instance;
+    }
 
     public void addProductToStock(Stock stock) {
         try (StockDao stockDao = daoFactory.createStockDao()) {
