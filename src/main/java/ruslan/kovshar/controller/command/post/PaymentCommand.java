@@ -18,6 +18,12 @@ public class PaymentCommand implements Command {
     private CheckService checkService = CheckService.getInstance();
     private PaymentService paymentService = PaymentService.getInstance();
 
+    /**
+     * makes payment and closes check
+     *
+     * @param request http servlet request
+     * @return redirect to home page
+     */
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -26,19 +32,16 @@ public class PaymentCommand implements Command {
         String nameOnCard = request.getParameter(Params.NAME_ON_CARD);
         String cardNumber = request.getParameter(Params.CARD_NUMBER);
 
-        BigDecimal value = BigDecimal.valueOf(Double.parseDouble(request.getParameter(Params.VALUE)));
+        BigDecimal value = new BigDecimal(request.getParameter(Params.VALUE));
         Buyer buyer = new Buyer(nameOnCard, cardNumber);
 
         user.setUserCash(user.getUserCash().add(value));
         paymentService.makePay(buyer, user);
 
         check.setUser(user);
-
-        System.err.println(buyer.getId());
-
         check.setBuyer(buyer);
         checkService.createCheck(check);
         session.removeAttribute("check");
-        return URI.REDIRECT + request.getServletPath() + "/";
+        return URI.REDIRECT + request.getServletPath() + URI.HOME;
     }
 }

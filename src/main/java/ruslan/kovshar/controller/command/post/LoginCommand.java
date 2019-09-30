@@ -15,6 +15,13 @@ public class LoginCommand implements Command {
 
     private UserService userService = UserService.getInstance();
 
+    /**
+     * checks the user and set him to session
+     *
+     * @param request http servlet request
+     * @return redirect to redirectURI if user exist,
+     * redirect to login page with error if not
+     */
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -23,17 +30,11 @@ public class LoginCommand implements Command {
         Optional<User> checkUserForLogin = userService.getUser(email, Encoder.encodePassword(password));
         if (checkUserForLogin.isPresent()) {
             User user = checkUserForLogin.get();
-
-            System.out.println(user.getAuthorities());
-
             session.setAttribute("user", user);
-
-            String redirect = (String) session.getAttribute("redirectURI");
-
-            if (redirect == null || redirect.equals("/")) redirect = URI.API + URI.HOME;
-
+            String redirectURI = (String) session.getAttribute("redirectURI");
+            if (redirectURI == null || redirectURI.equals("/")) redirectURI = URI.API + URI.HOME;
             session.removeAttribute("redirectURI");
-            return URI.REDIRECT + redirect;
+            return URI.REDIRECT + redirectURI;
         } else {
             return URI.REDIRECT + request.getServletPath() + URI.LOGIN + Params.PARAM + Params.ERROR;
         }

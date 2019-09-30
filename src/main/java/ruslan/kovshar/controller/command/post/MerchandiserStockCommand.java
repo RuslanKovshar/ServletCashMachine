@@ -4,7 +4,7 @@ import ruslan.kovshar.controller.command.Command;
 import ruslan.kovshar.model.entity.Product;
 import ruslan.kovshar.model.service.ProductService;
 import ruslan.kovshar.model.service.StockService;
-import ruslan.kovshar.model.validator.Validator;
+import ruslan.kovshar.controller.validator.IntegerValidator;
 import ruslan.kovshar.view.Params;
 import ruslan.kovshar.view.URI;
 
@@ -17,13 +17,13 @@ public class MerchandiserStockCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        final String name = request.getParameter(Params.NAME);
-        final String count = request.getParameter(Params.COUNT_ON_STOCK);
-
-        Integer code = Validator.integerValidator(name);
+        String name = request.getParameter(Params.NAME);
+        String count = request.getParameter(Params.COUNT_ON_STOCK);
+        Integer code = IntegerValidator.integerValidator(name);
 
         Product product;
         try {
+            //todo: попробуй вынести в одельный метод
             if (code != null) {
                 product = productService.findProductByCode(code);
             } else {

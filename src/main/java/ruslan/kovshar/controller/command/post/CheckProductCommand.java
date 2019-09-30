@@ -3,7 +3,7 @@ package ruslan.kovshar.controller.command.post;
 import ruslan.kovshar.controller.command.Command;
 import ruslan.kovshar.model.entity.Product;
 import ruslan.kovshar.model.service.ProductService;
-import ruslan.kovshar.model.validator.Validator;
+import ruslan.kovshar.controller.validator.IntegerValidator;
 import ruslan.kovshar.view.Params;
 import ruslan.kovshar.view.URI;
 
@@ -13,11 +13,18 @@ public class CheckProductCommand implements Command {
 
     private ProductService productService = ProductService.getInstance();
 
+    /**
+     * finds product in the stock
+     *
+     * @param request http servlet request
+     * @return redirect to product page if product found,
+     * redirect to check page with error if not
+     */
     @Override
     public String execute(HttpServletRequest request) {
-        final String name = request.getParameter(Params.NAME);
+        String name = request.getParameter(Params.NAME);
 
-        Integer code = Validator.integerValidator(name);
+        Integer code = IntegerValidator.integerValidator(name);
 
         Product product;
         try {

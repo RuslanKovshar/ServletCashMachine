@@ -10,6 +10,12 @@ import javax.servlet.http.HttpSession;
 
 public class CloseCheckCommand implements Command {
 
+    /**
+     * redirects to payment page
+     *
+     * @param request http servlet request
+     * @return redirect to payment page
+     */
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();

@@ -7,6 +7,13 @@ import ruslan.kovshar.view.Params;
 import javax.servlet.http.HttpServletRequest;
 
 public class MerchandiserPageCommand implements Command {
+
+    /**
+     * displays merchandiser page
+     *
+     * @param request http servlet request
+     * @return merchandiser page
+     */
     @Override
     public String execute(HttpServletRequest request) {
         if (request.getParameter(Params.PRODUCT_EXIST) != null) {

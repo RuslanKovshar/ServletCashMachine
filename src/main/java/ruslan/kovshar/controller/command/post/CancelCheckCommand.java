@@ -17,6 +17,12 @@ public class CancelCheckCommand implements Command {
     private StockService stockService = StockService.getInstance();
     private PaymentService paymentService = PaymentService.getInstance();
 
+    /**
+     * cancels check and returns money to buyer
+     *
+     * @param request http servlet request
+     * @return redirect to home page
+     */
     @Override
     public String execute(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
@@ -32,6 +38,6 @@ public class CancelCheckCommand implements Command {
         user.setUserCash(user.getUserCash().subtract(check.getTotalPrice().multiply(BigDecimal.valueOf(-1))));
         paymentService.returnMoney(user);
         checkService.deleteCheck(check);
-        return URI.REDIRECT + request.getServletPath() + "/";
+        return URI.REDIRECT + request.getServletPath() + URI.HOME;
     }
 }

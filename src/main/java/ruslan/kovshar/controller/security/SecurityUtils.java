@@ -45,38 +45,10 @@ public class SecurityUtils {
                 continue;
             }
             List<String> urlPatterns = SecurityConfig.getUrlPatternsForRole(role);
-            System.err.println(urlPatterns);
             if (urlPatterns != null && urlPatterns.contains(urlPattern)) {
                 return true;
             }
         }
         return false;
     }
-
-    /*public static boolean isSecuredPage(String URI) {
-        return !SecurityConfig.getPagesForAllUsers().contains(URI);
-    }
-
-    public static boolean hasPermission(String URI, User user) {
-        System.out.println(URI);
-        final List<List<String>> collect = user.getAuthorities()
-                .stream()
-                .map(roles -> SecurityConfig.getPagesByRoles().get(roles)).collect(Collectors.toList());
-
-        System.out.println(collect);
-
-        String uri = URI.replaceFirst("/","");
-        return user.getAuthorities()
-                .stream()
-                .map(roles -> SecurityConfig.getPagesByRoles().get(roles))
-                .anyMatch(strings -> strings.stream()
-                        .anyMatch(s -> uri.startsWith(s.replace("/",""))));
-    }
-
-    public static boolean isGood(List<String> strings, String uri) {
-        for (String page : strings) {
-            return uri.startsWith(page);
-        }
-        return false;
-    }*/
 }

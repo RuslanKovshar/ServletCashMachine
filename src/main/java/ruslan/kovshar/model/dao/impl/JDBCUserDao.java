@@ -54,6 +54,7 @@ public class JDBCUserDao implements UserDao {
             preparedStatement.setString(4, entity.getSecondNameUA());
             preparedStatement.setString(5, entity.getFirstNameEN());
             preparedStatement.setString(6, entity.getSecondNameEN());
+            preparedStatement.setBigDecimal(7, entity.getUserCash());
             preparedStatement.executeUpdate();
 
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();

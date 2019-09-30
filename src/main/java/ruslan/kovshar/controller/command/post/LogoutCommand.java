@@ -8,6 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class LogoutCommand implements Command {
+    /**
+     * removes user from session
+     *
+     * @param request http servlet request
+     * @return redirect to login page with logout param
+     */
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();

@@ -16,6 +16,12 @@ public class CheckRemoveProductCommand implements Command {
 
     private StockService stockService = StockService.getInstance();
 
+    /**
+     * removes product from check
+     *
+     * @param request http servlet request
+     * @return redirect to check page
+     */
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -30,6 +36,8 @@ public class CheckRemoveProductCommand implements Command {
         if (productInCheck.isPresent()) {
             ProductInCheck checkProduct = productInCheck.get();
             check.getProducts().remove(checkProduct);
+
+            //todo: попробуй вынести в отдельный метод
             try {
                 stockService.updateStock(checkProduct.getProduct(), -checkProduct.getValue());
             } catch (TransactionException e) {

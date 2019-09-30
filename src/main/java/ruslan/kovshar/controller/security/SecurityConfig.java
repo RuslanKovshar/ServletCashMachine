@@ -26,12 +26,4 @@ class SecurityConfig {
     public static List<String> getUrlPatternsForRole(Roles role) {
         return pagesByRoles.get(role);
     }
-
-    static Map<Roles, List<String>> getPagesByRoles() {
-        return pagesByRoles;
-    }
-
-    static List<String> getPagesForAllUsers() {
-        return pagesForAllUsers;
-    }
 }

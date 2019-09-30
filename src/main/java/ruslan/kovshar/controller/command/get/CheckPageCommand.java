@@ -7,6 +7,12 @@ import ruslan.kovshar.view.Params;
 import javax.servlet.http.HttpServletRequest;
 
 public class CheckPageCommand implements Command {
+    /**
+     * displays check page
+     *
+     * @param request http servlet request
+     * @return check page
+     */
     @Override
     public String execute(HttpServletRequest request) {
         if (request.getParameter(Params.ERROR) != null) {

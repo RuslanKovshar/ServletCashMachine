@@ -7,6 +7,13 @@ import ruslan.kovshar.view.Params;
 import javax.servlet.http.HttpServletRequest;
 
 public class LoginPageCommand implements Command {
+
+    /**
+     * displays login page
+     *
+     * @param request http servlet request
+     * @return login page
+     */
     @Override
     public String execute(HttpServletRequest request) {
         if (request.getParameter(Params.ERROR) != null) {

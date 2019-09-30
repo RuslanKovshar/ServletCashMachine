@@ -1,6 +1,6 @@
-package ruslan.kovshar.model.validator;
+package ruslan.kovshar.controller.validator;
 
-public class Validator {
+public class IntegerValidator {
 
     public static Integer integerValidator(String param) {
         Integer result;

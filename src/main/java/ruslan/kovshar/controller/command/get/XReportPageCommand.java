@@ -13,6 +13,12 @@ public class XReportPageCommand implements Command {
 
     private CheckService checkService = CheckService.getInstance();
 
+    /**
+     * displays x_report page
+     *
+     * @param request http servlet request
+     * @return x_report page
+     */
     @Override
     public String execute(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");

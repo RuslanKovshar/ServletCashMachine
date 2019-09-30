@@ -20,6 +20,12 @@ public class ZReportPageCommand implements Command {
     private CheckService checkService = CheckService.getInstance();
     private UserService userService = UserService.getInstance();
 
+    /**
+     * displays z_report page
+     *
+     * @param request http servlet request
+     * @return z_report page
+     */
     @Override
     public String execute(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");

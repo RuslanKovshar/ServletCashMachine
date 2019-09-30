@@ -17,6 +17,13 @@ public class CheckAddProduct implements Command {
 
     private StockService stockService = StockService.getInstance();
 
+    /**
+     * adds product to check
+     *
+     * @param request http servlet request
+     * @return redirect to check page if product is on stock,
+     * redirect to product page with error if not
+     */
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -24,13 +31,8 @@ public class CheckAddProduct implements Command {
         Product product = (Product) session.getAttribute("product");
         Check check = (Check) session.getAttribute("check");
 
-        try {
-            stockService.updateStock(product, value);
-        } catch (TransactionException e) {
-            //log.error(TRANSACTION_ERROR);
+        if (!productIsOnStock(product, value)) {
             return URI.REDIRECT + request.getServletPath() + URI.CHECK + URI.PRODUCT + Params.PARAM + Params.ERROR;
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
         Optional<ProductInCheck> productInCheck = check.getProducts().stream().filter(s -> s.getProduct().equals(product)).findAny();
@@ -51,5 +53,25 @@ public class CheckAddProduct implements Command {
         check.calculateTotalPrice();
         session.removeAttribute("product");
         return URI.REDIRECT + request.getServletPath() + URI.CHECK;
+    }
+
+    /**
+     * checks count of product on the stock
+     *
+     * @param product        product
+     * @param countOfProduct count of product
+     * @return true count of product is on stock, false if not
+     */
+    private boolean productIsOnStock(Product product, Integer countOfProduct) {
+        try {
+            stockService.updateStock(product, countOfProduct);
+            return true;
+        } catch (TransactionException e) {
+            //log.error(TRANSACTION_ERROR);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
