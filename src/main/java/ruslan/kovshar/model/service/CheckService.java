@@ -18,6 +18,9 @@ public class CheckService {
     private CheckService() {
     }
 
+    /**
+     * @return instance
+     */
     public static CheckService getInstance() {
         if (instance == null) {
             synchronized (CheckService.class) {
@@ -29,43 +32,72 @@ public class CheckService {
         return instance;
     }
 
+    /**
+     * saves the check in database
+     *
+     * @param check check
+     */
     public void createCheck(Check check) {
-        try(final CheckDao checkDao = daoFactory.createCheckDao();
-            final ProductInCheckDao productInCheckDao = daoFactory.createProductInCheckDao()) {
+        try (final CheckDao checkDao = daoFactory.createCheckDao();
+             final ProductInCheckDao productInCheckDao = daoFactory.createProductInCheckDao()) {
             checkDao.create(check);
             check.getProducts().forEach(productInCheckDao::create);
         }
     }
 
+    /**
+     * returns all users checks
+     *
+     * @param user user
+     * @return checks
+     */
     public List<Check> getAllUserChecks(User user) {
-        try(final CheckDao checkDao = daoFactory.createCheckDao();
-            final ProductInCheckDao productInCheckDao = daoFactory.createProductInCheckDao()) {
+        try (final CheckDao checkDao = daoFactory.createCheckDao();
+             final ProductInCheckDao productInCheckDao = daoFactory.createProductInCheckDao()) {
             List<Check> userChecks = checkDao.findAllByUser(user);
             userChecks.forEach(check -> check.setProducts(productInCheckDao.findAllByCheck(check)));
             return userChecks;
         }
     }
 
+    /**
+     * deletes check
+     *
+     * @param check check
+     */
     public void deleteCheck(Check check) {
-        try(final CheckDao checkDao = daoFactory.createCheckDao();
-            final BuyerDao buyerDao = daoFactory.createBuyerDao()) {
+        try (final CheckDao checkDao = daoFactory.createCheckDao();
+             final BuyerDao buyerDao = daoFactory.createBuyerDao()) {
             buyerDao.delete(check.getBuyer().getId());
             checkDao.delete(check.getId());
         }
     }
 
+    /**
+     * finds check by id
+     *
+     * @param id check id
+     * @return check
+     */
     public Check findCheckById(long id) {
-        try(final CheckDao checkDao = daoFactory.createCheckDao();
-            final ProductInCheckDao productInCheckDao = daoFactory.createProductInCheckDao()) {
+        try (final CheckDao checkDao = daoFactory.createCheckDao();
+             final ProductInCheckDao productInCheckDao = daoFactory.createProductInCheckDao()) {
             Check check = checkDao.findById(id);
             check.setProducts(productInCheckDao.findAllByCheck(check));
             return check;
         }
     }
 
+    /**
+     * finds page with checks
+     *
+     * @param user     user
+     * @param pageInfo pageInfo
+     * @return page with checks
+     */
     public Page<Check> findPageWithChecks(User user, Page pageInfo) {
-        try(final CheckDao checkDao = daoFactory.createCheckDao();
-            final ProductInCheckDao productInCheckDao = daoFactory.createProductInCheckDao()) {
+        try (final CheckDao checkDao = daoFactory.createCheckDao();
+             final ProductInCheckDao productInCheckDao = daoFactory.createProductInCheckDao()) {
             Page<Check> page = checkDao.findPageAllByUser(user, pageInfo);
             page.getContent().forEach(check -> check.setProducts(productInCheckDao.findAllByCheck(check)));
             return page;

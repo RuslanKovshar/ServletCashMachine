@@ -5,6 +5,10 @@ import ruslan.kovshar.model.entity.Buyer;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
+/**
+ * extracts buyer from result set
+ */
 public class BuyerMapper extends Mapper<Buyer> {
     @Override
     public Buyer extractFromResultSet(ResultSet rs) throws SQLException {

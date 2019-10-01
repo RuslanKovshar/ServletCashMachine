@@ -1,5 +1,8 @@
 package ruslan.kovshar.view;
 
+/**
+ * contains params that uses in application
+ */
 public interface Params {
     String PARAM = "?";
     String ERROR = "error";

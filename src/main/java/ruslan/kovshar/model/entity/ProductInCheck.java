@@ -2,6 +2,9 @@ package ruslan.kovshar.model.entity;
 
 import java.math.BigDecimal;
 
+/**
+ * Represents an ProductInCheck Entity
+ */
 public class ProductInCheck {
     private Long id;
     private Product product;

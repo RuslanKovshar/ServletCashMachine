@@ -4,6 +4,9 @@ import org.apache.commons.dbcp.BasicDataSource;
 
 import javax.sql.DataSource;
 
+/**
+ * contains the data source
+ */
 class ConnectionPoolHolder {
     private static volatile DataSource dataSource;
 

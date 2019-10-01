@@ -5,6 +5,9 @@ import ruslan.kovshar.model.entity.Stock;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * extracts stock from result set
+ */
 public class StockMapper extends Mapper<Stock> {
     @Override
     public Stock extractFromResultSet(ResultSet rs) throws SQLException {

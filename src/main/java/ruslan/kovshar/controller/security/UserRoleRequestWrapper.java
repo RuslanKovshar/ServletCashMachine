@@ -8,6 +8,9 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * wrapper of HttpServletRequestWrapper with user info
+ */
 public class UserRoleRequestWrapper extends HttpServletRequestWrapper {
 
     private String user;

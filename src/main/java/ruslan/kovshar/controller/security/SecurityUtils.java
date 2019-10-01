@@ -8,6 +8,12 @@ import java.util.Set;
 
 public class SecurityUtils {
 
+    /**
+     * checks if the page is protected
+     *
+     * @param request http servlet request
+     * @return true if yes, false if not
+     */
     public static boolean isSecurityPage(HttpServletRequest request) {
         String urlPattern = getUrlPattern(request);
 
@@ -22,6 +28,12 @@ public class SecurityUtils {
         return false;
     }
 
+    /**
+     * gets the url
+     *
+     * @param request http servlet request
+     * @return urlPath
+     */
     private static String getUrlPattern(HttpServletRequest request) {
         String urlPath = "/";
         if (request.getPathInfo() != null) {
@@ -30,7 +42,13 @@ public class SecurityUtils {
         return urlPath;
     }
 
-    // Проверить имеет ли данный 'request' подходящую роль?
+
+    /**
+     * checks for permission
+     *
+     * @param request http servlet request
+     * @return true if yes, false if not
+     */
     public static boolean hasPermission(HttpServletRequest request) {
         String urlPattern = getUrlPattern(request);
 

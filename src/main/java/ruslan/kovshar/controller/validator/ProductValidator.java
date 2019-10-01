@@ -8,6 +8,9 @@ import java.util.Map;
 
 import static ruslan.kovshar.view.ValidationMessages.*;
 
+/**
+ * validates product info
+ */
 public class ProductValidator implements Validator<ProductDTO> {
 
     private Map<String, String> errors = new HashMap<>();

@@ -3,6 +3,11 @@ package ruslan.kovshar.model.pagination;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * contains the page info
+ *
+ * @param <T> object that page will be contain
+ */
 public class Page<T> {
 
     private int totalRecords;
@@ -67,17 +72,5 @@ public class Page<T> {
 
     public void setSortType(String sortType) {
         this.sortType = sortType;
-    }
-
-    @Override
-    public String toString() {
-        return "Page{" +
-                "totalRecords=" + totalRecords +
-                ", currentPage=" + currentPage +
-                ", content=" + content +
-                ", maxResult=" + maxResult +
-                ", totalPages=" + totalPages +
-                ", sortType='" + sortType + '\'' +
-                '}';
     }
 }

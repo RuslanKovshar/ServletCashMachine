@@ -11,7 +11,9 @@ import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
-
+/**
+ * serves to access user in database
+ */
 public class JDBCUserDao implements UserDao {
     private Connection connection;
 

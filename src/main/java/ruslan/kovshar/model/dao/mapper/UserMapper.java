@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 
+/**
+ * extracts user from result set
+ */
 public class UserMapper extends Mapper<User> {
     @Override
     public User extractFromResultSet(ResultSet rs) throws SQLException {

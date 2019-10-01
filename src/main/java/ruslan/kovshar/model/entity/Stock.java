@@ -1,5 +1,8 @@
 package ruslan.kovshar.model.entity;
 
+/**
+ * Represents an Stock Entity
+ */
 public class Stock {
     private Long id;
     private Product product;

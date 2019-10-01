@@ -1,5 +1,8 @@
 package ruslan.kovshar.view;
 
+/**
+ * contains application URIs
+ */
 public interface URI {
     String HOME = "/";
     String ANY_PATH = "/**";

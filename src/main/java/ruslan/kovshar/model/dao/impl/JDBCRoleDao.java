@@ -10,6 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * serves to access role in database
+ */
 public class JDBCRoleDao implements RoleDao {
     private Connection connection;
 

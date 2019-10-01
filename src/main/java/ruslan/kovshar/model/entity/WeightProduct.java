@@ -5,6 +5,9 @@ import ruslan.kovshar.model.enums.Types;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+/**
+ * Represents an WeightProduct Entity
+ */
 public class WeightProduct extends Product {
     @Override
     public BigDecimal calculatePrice(Integer value) {

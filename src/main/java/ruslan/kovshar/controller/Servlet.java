@@ -1,11 +1,8 @@
 package ruslan.kovshar.controller;
 
-import ruslan.kovshar.controller.command.*;
-import ruslan.kovshar.controller.command.get.*;
-import ruslan.kovshar.controller.command.post.*;
-import ruslan.kovshar.model.service.*;
+import ruslan.kovshar.controller.command.Command;
+import ruslan.kovshar.controller.command.CommandHolder;
 import ruslan.kovshar.view.Pages;
-import ruslan.kovshar.view.TextConstants;
 import ruslan.kovshar.view.URI;
 
 import javax.servlet.ServletException;

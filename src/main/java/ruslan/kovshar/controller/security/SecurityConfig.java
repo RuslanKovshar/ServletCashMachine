@@ -5,6 +5,9 @@ import ruslan.kovshar.view.URI;
 
 import java.util.*;
 
+/**
+ * contains pages by roles
+ */
 class SecurityConfig {
     private static Map<Roles, List<String>> pagesByRoles = new HashMap<>();
     private static List<String> pagesForAllUsers = new ArrayList<>();

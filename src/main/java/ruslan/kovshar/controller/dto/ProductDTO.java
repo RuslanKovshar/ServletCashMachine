@@ -4,6 +4,9 @@ import ruslan.kovshar.model.enums.Types;
 
 import java.math.BigDecimal;
 
+/**
+ * contains product information that executes from request
+ */
 public class ProductDTO {
 
     private Integer code;

@@ -1,5 +1,8 @@
 package ruslan.kovshar.view;
 
+/**
+ * contains sql queries
+ */
 public interface SQL {
     /*Sql queries for Users*/
     String INSERT_NEW_USER = "INSERT INTO users (email,password,first_name_ua,second_name_ua,first_name_en,second_name_en,cash) VALUES (?,?,?,?,?,?,?)";

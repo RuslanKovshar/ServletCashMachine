@@ -1,5 +1,8 @@
 package ruslan.kovshar.controller.dto;
 
+/**
+ * contains user information that executes from request
+ */
 public class UserDTO {
 
     private String email;

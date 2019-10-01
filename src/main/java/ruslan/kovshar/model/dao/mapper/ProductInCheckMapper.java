@@ -5,6 +5,9 @@ import ruslan.kovshar.model.entity.ProductInCheck;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * extracts product in check from result set
+ */
 public class ProductInCheckMapper extends Mapper<ProductInCheck> {
     @Override
     public ProductInCheck extractFromResultSet(ResultSet rs) throws SQLException {

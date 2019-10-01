@@ -8,6 +8,9 @@ import ruslan.kovshar.model.enums.Types;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * extracts product from result set
+ */
 public class ProductMapper extends Mapper<Product> {
     @Override
     public Product extractFromResultSet(ResultSet rs) throws SQLException {

@@ -1,5 +1,8 @@
 package ruslan.kovshar.view;
 
+/**
+ * contains validation errors and messages
+ */
 public interface ValidationMessages {
     String ERROR = "Error";
     String EMAIL_ERROR = "email" + ERROR;

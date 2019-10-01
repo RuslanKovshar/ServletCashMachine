@@ -1,5 +1,8 @@
 package ruslan.kovshar.view;
 
+/**
+ * contains pages paths
+ */
 public interface Pages {
     String WEB_INF = "/WEB-INF/view/";
     String JSP = ".jsp";

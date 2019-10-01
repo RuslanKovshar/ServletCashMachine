@@ -10,6 +10,9 @@ import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * serves to access stock in database
+ */
 public class JDBCStockDao implements StockDao {
     private Connection connection;
 

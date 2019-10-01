@@ -14,6 +14,9 @@ public class PaymentService {
     private PaymentService() {
     }
 
+    /**
+     * @return instance
+     */
     public static PaymentService getInstance() {
         if (instance == null) {
             synchronized (UserService.class) {
@@ -25,6 +28,12 @@ public class PaymentService {
         return instance;
     }
 
+    /**
+     * saves new buyer and increase user cash
+     *
+     * @param buyer buyer
+     * @param user  user
+     */
     //TODO: заменить транзакцией(сделать красиво)
     public void makePay(Buyer buyer, User user) {
         try (final BuyerDao buyerDao = daoFactory.createBuyerDao();
@@ -34,6 +43,11 @@ public class PaymentService {
         }
     }
 
+    /**
+     * decreases user cash
+     *
+     * @param user user
+     */
     //TODO:
     public void returnMoney(User user) {
         try (final UserDao userDao = daoFactory.createUserDao()) {

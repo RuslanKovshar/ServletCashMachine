@@ -10,6 +10,9 @@ import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * serves to access product in database
+ */
 public class JDBCProductDao implements ProductDao {
     private Connection connection;
 

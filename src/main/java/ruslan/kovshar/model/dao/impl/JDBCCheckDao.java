@@ -12,6 +12,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * serves to access check in database
+ */
 public class JDBCCheckDao implements CheckDao {
     private Connection connection;
 

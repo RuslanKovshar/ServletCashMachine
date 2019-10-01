@@ -7,6 +7,9 @@ import ruslan.kovshar.view.SQL;
 import java.sql.*;
 import java.util.List;
 
+/**
+ * serves to access buyer in database
+ */
 public class JDBCBuyerDao implements BuyerDao {
 
     private Connection connection;

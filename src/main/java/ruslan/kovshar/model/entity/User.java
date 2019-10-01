@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.Set;
 
+/**
+ * Represents an User Entity
+ */
 public class User {
 
     private Long id;

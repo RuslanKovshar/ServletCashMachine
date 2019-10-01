@@ -5,6 +5,9 @@ import ruslan.kovshar.model.enums.Types;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+/**
+ * Represents an Product Entity
+ */
 public abstract class Product {
 
     protected Long id;

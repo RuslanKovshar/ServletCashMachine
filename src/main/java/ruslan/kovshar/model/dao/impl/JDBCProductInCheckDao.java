@@ -14,6 +14,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * serves to access product in check in database
+ */
 public class JDBCProductInCheckDao implements ProductInCheckDao {
 
     private Connection connection;

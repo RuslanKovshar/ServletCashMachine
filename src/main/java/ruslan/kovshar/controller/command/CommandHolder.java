@@ -7,6 +7,9 @@ import ruslan.kovshar.view.URI;
 
 import java.util.Map;
 
+/**
+ * contains all commands
+ */
 public class CommandHolder {
 
     public static void init(Map<String,Command> commands) {

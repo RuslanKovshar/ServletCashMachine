@@ -3,6 +3,9 @@ package ruslan.kovshar.controller.security;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * encodes password
+ */
 public class Encoder {
 
     public static String encodePassword(String password) {

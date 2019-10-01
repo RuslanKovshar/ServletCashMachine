@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Represents an User Entity
+ */
 public class Check {
 
     private Long id;

@@ -5,6 +5,9 @@ import ruslan.kovshar.model.entity.Check;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * extracts check from result set
+ */
 public class CheckMapper extends Mapper<Check> {
     @Override
     public Check extractFromResultSet(ResultSet rs) throws SQLException {

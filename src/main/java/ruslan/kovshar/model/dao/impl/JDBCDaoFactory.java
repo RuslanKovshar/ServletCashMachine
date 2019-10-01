@@ -6,10 +6,18 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * creates dao
+ */
 public class JDBCDaoFactory extends DaoFactory {
 
     private DataSource dataSource = ConnectionPoolHolder.getDataSource();
 
+    /**
+     * creates connection with database
+     *
+     * @return connection
+     */
     private Connection getConnection() {
         try {
             return dataSource.getConnection();

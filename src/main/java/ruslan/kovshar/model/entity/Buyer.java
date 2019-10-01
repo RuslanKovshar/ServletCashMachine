@@ -1,5 +1,9 @@
 package ruslan.kovshar.model.entity;
 
+
+/**
+ * Represents an Buyer Entity
+ */
 public class Buyer {
     private Long id;
     private String nameOnCard;

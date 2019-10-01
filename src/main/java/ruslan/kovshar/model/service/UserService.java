@@ -19,6 +19,9 @@ public class UserService {
     private UserService() {
     }
 
+    /**
+     * @return instance
+     */
     public static UserService getInstance() {
         if (instance == null) {
             synchronized (UserService.class) {
@@ -30,6 +33,13 @@ public class UserService {
         return instance;
     }
 
+    /**
+     * saves new user
+     *
+     * @param user user
+     * @param role role
+     * @return true if user created, false if not
+     */
     public boolean addUser(User user, Roles role) {
         try (UserDao userDao = daoFactory.createUserDao();
              RoleDao roleDao = daoFactory.createRoleDao()) {
@@ -42,18 +52,37 @@ public class UserService {
         return false;
     }
 
+    /**
+     * finds user by password and email
+     *
+     * @param email    user email
+     * @param password user password
+     * @return user
+     */
     public Optional<User> getUser(String email, String password) {
         try (UserDao userDao = daoFactory.createUserDao()) {
             return userDao.findByEmailAndPassword(email, password);
         }
     }
 
+
+    /**
+     * updates user
+     *
+     * @param user user
+     */
     public void updateUser(User user) {
         try (UserDao userDao = daoFactory.createUserDao()) {
             userDao.update(user);
         }
     }
 
+    /**
+     * creates user from userDTO
+     *
+     * @param userDTO user information
+     * @return user
+     */
     public User createUser(UserDTO userDTO) {
         return new User.Builder()
                 .email(userDTO.getEmail())
