@@ -1,5 +1,6 @@
 package ruslan.kovshar.controller.validator;
 
+import ruslan.kovshar.controller.dto.UserDTO;
 import ruslan.kovshar.model.entity.User;
 
 import java.util.HashMap;
@@ -7,14 +8,14 @@ import java.util.Map;
 
 import static ruslan.kovshar.view.ValidationMessages.*;
 
-public class UserValidator implements Validator<User> {
+public class UserValidator implements Validator<UserDTO> {
 
     private Map<String, String> errors = new HashMap<>();
     private String emailPattern = "^([a-z0-9_.-]+)@([a-z0-9_-]+).([a-z]{2,6})$";
     private String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[.-_])(?=\\S+$).{8,}$";
 
     @Override
-    public void validate(User entity) {
+    public void validate(UserDTO entity) {
         if (!entity.getEmail().matches(emailPattern)) {
             errors.put(EMAIL_ERROR, EMAIL_MESSAGE);
         }

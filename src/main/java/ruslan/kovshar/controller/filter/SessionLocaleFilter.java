@@ -1,5 +1,7 @@
 package ruslan.kovshar.controller.filter;
 
+import ruslan.kovshar.view.Params;
+
 import javax.servlet.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +19,8 @@ public class SessionLocaleFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse res = (HttpServletResponse) servletResponse;
 
-        if (req.getParameter("lang") != null) {
-            req.getSession().setAttribute("lang", req.getParameter("lang"));
+        if (req.getParameter(Params.LANG) != null) {
+            req.getSession().setAttribute(Params.LANG, req.getParameter(Params.LANG));
         }
 
         filterChain.doFilter(servletRequest, servletResponse);

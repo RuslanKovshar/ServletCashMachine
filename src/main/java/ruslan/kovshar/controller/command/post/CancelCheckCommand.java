@@ -6,6 +6,7 @@ import ruslan.kovshar.model.entity.User;
 import ruslan.kovshar.model.service.CheckService;
 import ruslan.kovshar.model.service.PaymentService;
 import ruslan.kovshar.model.service.StockService;
+import ruslan.kovshar.view.Params;
 import ruslan.kovshar.view.URI;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,8 +26,8 @@ public class CancelCheckCommand implements Command {
      */
     @Override
     public String execute(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
-        long id = Long.parseLong(request.getParameter("id"));
+        User user = (User) request.getSession().getAttribute(Params.USER);
+        long id = Long.parseLong(request.getParameter(Params.ID));
         Check check = checkService.findCheckById(id);
         check.getProducts().forEach(productInCheck -> {
             try {

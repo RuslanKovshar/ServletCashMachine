@@ -18,7 +18,7 @@ public class JDBCProductInCheckDao implements ProductInCheckDao {
 
     private Connection connection;
 
-    public JDBCProductInCheckDao(Connection connection) {
+    JDBCProductInCheckDao(Connection connection) {
         this.connection = connection;
     }
 

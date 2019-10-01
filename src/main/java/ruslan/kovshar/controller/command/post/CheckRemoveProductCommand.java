@@ -25,8 +25,8 @@ public class CheckRemoveProductCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        Check check = (Check) session.getAttribute("check");
-        String name = request.getParameter("name");
+        Check check = (Check) session.getAttribute(Params.CHECK);
+        String name = request.getParameter(Params.NAME);
 
         Optional<ProductInCheck> productInCheck = check.getProducts()
                 .stream()
@@ -37,14 +37,11 @@ public class CheckRemoveProductCommand implements Command {
             ProductInCheck checkProduct = productInCheck.get();
             check.getProducts().remove(checkProduct);
 
-            //todo: попробуй вынести в отдельный метод
             try {
                 stockService.updateStock(checkProduct.getProduct(), -checkProduct.getValue());
-            } catch (TransactionException e) {
-                //log.error(TRANSACTION_ERROR);
-                return URI.REDIRECT + request.getServletPath() + URI.CHECK + URI.PRODUCT + Params.PARAM + Params.ERROR;
             } catch (Exception e) {
                 e.printStackTrace();
+                return URI.REDIRECT + request.getServletPath() + URI.CHECK + URI.PRODUCT + Params.PARAM + Params.ERROR;
             }
         }
         check.calculateTotalPrice();

@@ -8,7 +8,6 @@ public class Encoder {
     public static String encodePassword(String password) {
         String hashedPassword;
         try {
-            // Create MessageDigest instance for MD5
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(password.getBytes());
             byte[] bytes = md.digest();

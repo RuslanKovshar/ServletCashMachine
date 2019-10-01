@@ -30,10 +30,10 @@ public class LoginCommand implements Command {
         Optional<User> checkUserForLogin = userService.getUser(email, Encoder.encodePassword(password));
         if (checkUserForLogin.isPresent()) {
             User user = checkUserForLogin.get();
-            session.setAttribute("user", user);
-            String redirectURI = (String) session.getAttribute("redirectURI");
-            if (redirectURI == null || redirectURI.equals("/")) redirectURI = URI.API + URI.HOME;
-            session.removeAttribute("redirectURI");
+            session.setAttribute(Params.USER, user);
+            String redirectURI = (String) session.getAttribute(Params.REDIRECTED_URI);
+            if (redirectURI == null || redirectURI.equals(URI.HOME)) redirectURI = URI.API + URI.HOME;
+            session.removeAttribute(Params.REDIRECTED_URI);
             return URI.REDIRECT + redirectURI;
         } else {
             return URI.REDIRECT + request.getServletPath() + URI.LOGIN + Params.PARAM + Params.ERROR;

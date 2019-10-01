@@ -19,11 +19,10 @@ public class MerchandiserStockCommand implements Command {
     public String execute(HttpServletRequest request) {
         String name = request.getParameter(Params.NAME);
         String count = request.getParameter(Params.COUNT_ON_STOCK);
-        Integer code = IntegerValidator.integerValidator(name);
+        Integer code = IntegerValidator.validate(name);
 
         Product product;
         try {
-            //todo: попробуй вынести в одельный метод
             if (code != null) {
                 product = productService.findProductByCode(code);
             } else {

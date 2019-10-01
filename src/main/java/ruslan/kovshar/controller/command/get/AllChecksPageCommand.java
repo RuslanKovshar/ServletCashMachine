@@ -6,6 +6,7 @@ import ruslan.kovshar.model.pagination.Page;
 import ruslan.kovshar.model.service.CheckService;
 import ruslan.kovshar.controller.validator.IntegerValidator;
 import ruslan.kovshar.view.Pages;
+import ruslan.kovshar.view.Params;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,17 +22,17 @@ public class AllChecksPageCommand implements Command {
      */
     @Override
     public String execute(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
-        String pageNumberParameter = request.getParameter("page");
-        String sortParameter = request.getParameter("sort");
-        String maxResultParameter = request.getParameter("maxResult");
+        User user = (User) request.getSession().getAttribute(Params.USER);
+        String pageNumberParameter = request.getParameter(Params.PAGE);
+        String sortParameter = request.getParameter(Params.SORT_TYPE);
+        String maxResultParameter = request.getParameter(Params.MAX_RESULT);
 
-        Integer pageNumber = IntegerValidator.integerValidator(pageNumberParameter);
-        Integer maxResult = IntegerValidator.integerValidator(maxResultParameter);
+        Integer pageNumber = IntegerValidator.validate(pageNumberParameter);
+        Integer maxResult = IntegerValidator.validate(maxResultParameter);
 
         Page pageInfo = new Page(pageNumber, maxResult, sortParameter);
 
-        request.setAttribute("page", checkService.findPageWithChecks(user, pageInfo));
+        request.setAttribute(Params.PAGE, checkService.findPageWithChecks(user, pageInfo));
         return Pages.ALL_CHECKS_PAGE;
     }
 }

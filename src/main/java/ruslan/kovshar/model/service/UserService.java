@@ -1,5 +1,7 @@
 package ruslan.kovshar.model.service;
 
+import ruslan.kovshar.controller.dto.UserDTO;
+import ruslan.kovshar.controller.security.Encoder;
 import ruslan.kovshar.model.dao.DaoFactory;
 import ruslan.kovshar.model.dao.RoleDao;
 import ruslan.kovshar.model.dao.UserDao;
@@ -47,8 +49,19 @@ public class UserService {
     }
 
     public void updateUser(User user) {
-        try(UserDao userDao = daoFactory.createUserDao()) {
+        try (UserDao userDao = daoFactory.createUserDao()) {
             userDao.update(user);
         }
+    }
+
+    public User createUser(UserDTO userDTO) {
+        return new User.Builder()
+                .email(userDTO.getEmail())
+                .password(Encoder.encodePassword(userDTO.getPassword()))
+                .firstNameEN(userDTO.getFirstNameEN())
+                .firstNameUA(userDTO.getFirstNameUA())
+                .secondNameEN(userDTO.getSecondNameEN())
+                .secondNameUA(userDTO.getSecondNameUA())
+                .build();
     }
 }

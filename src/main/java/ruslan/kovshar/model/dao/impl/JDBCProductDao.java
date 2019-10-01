@@ -13,7 +13,7 @@ import java.util.Optional;
 public class JDBCProductDao implements ProductDao {
     private Connection connection;
 
-    public JDBCProductDao(Connection connection) {
+    JDBCProductDao(Connection connection) {
         this.connection = connection;
     }
 

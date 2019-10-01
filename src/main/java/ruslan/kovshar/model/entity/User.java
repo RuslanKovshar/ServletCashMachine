@@ -32,7 +32,7 @@ public class User {
         private BigDecimal userCash;
 
         public Builder() {
-            
+
         }
 
         public Builder id(Long val){
@@ -92,16 +92,16 @@ public class User {
     }
 
     private User(Builder builder) {
-       id = builder.id;
-       email = builder.email;
-       password = builder.password;
-       firstNameUA = builder.firstNameUA;
-       secondNameUA = builder.secondNameUA;
-       firstNameEN = builder.firstNameEN;
-       secondNameEN = builder.secondNameEN;
-       authorities = builder.authorities;
-       checks = builder.checks;
-       userCash = builder.userCash;
+        id = builder.id;
+        email = builder.email;
+        password = builder.password;
+        firstNameUA = builder.firstNameUA;
+        secondNameUA = builder.secondNameUA;
+        firstNameEN = builder.firstNameEN;
+        secondNameEN = builder.secondNameEN;
+        authorities = builder.authorities;
+        checks = builder.checks;
+        userCash = builder.userCash;
     }
 
     public Long getId() {

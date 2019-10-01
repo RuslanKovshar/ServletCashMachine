@@ -19,11 +19,11 @@ class SecurityConfig {
         pagesByRoles.put(Roles.SENIOR_CASHIER, Arrays.asList(URI.Z_REPORT, URI.X_REPORT));
     }
 
-    public static Set<Roles> getAllAppRoles() {
+    static Set<Roles> getAllAppRoles() {
         return pagesByRoles.keySet();
     }
 
-    public static List<String> getUrlPatternsForRole(Roles role) {
+    static List<String> getUrlPatternsForRole(Roles role) {
         return pagesByRoles.get(role);
     }
 }

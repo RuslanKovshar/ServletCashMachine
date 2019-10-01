@@ -2,12 +2,11 @@ package ruslan.kovshar.view;
 
 public interface Params {
     String PARAM = "?";
-    String SLASH = "/";
     String ERROR = "error";
     String LOGOUT = "logout";
 
     String SUCCESS = "success";
-    String ID_PARAM = "id";
+    String ID = "id";
 
     String EMAIL = "email";
     String PASSWORD = "password";
@@ -28,4 +27,16 @@ public interface Params {
 
     String PRODUCT_EXIST = "productExist";
     String PRODUCT_NOT_FOUND = "productNotFound";
+
+    String USER = "user";
+    String PAGE = "page";
+    String SORT_TYPE = "sort";
+    String MAX_RESULT = "maxResult";
+    String NUMBER = "number";
+    String PRODUCT = "product";
+    String CHECK = "check";
+    String REDIRECTED_URI = "redirectURI";
+    String PRODUCT_DTO = "productDTO";
+
+    String LANG = "lang";
 }

@@ -23,8 +23,7 @@ public class CheckProductCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         String name = request.getParameter(Params.NAME);
-
-        Integer code = IntegerValidator.integerValidator(name);
+        Integer code = IntegerValidator.validate(name);
 
         Product product;
         try {
@@ -33,7 +32,7 @@ public class CheckProductCommand implements Command {
             } else {
                 product = productService.findProductByName(name);
             }
-            request.getSession().setAttribute("product", product);
+            request.getSession().setAttribute(Params.PRODUCT, product);
         } catch (Exception e) {
             e.printStackTrace();
             return URI.REDIRECT + request.getServletPath() + URI.CHECK + Params.PARAM + Params.ERROR;

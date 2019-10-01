@@ -11,7 +11,7 @@ public class JDBCBuyerDao implements BuyerDao {
 
     private Connection connection;
 
-    public JDBCBuyerDao(Connection connection) {
+    JDBCBuyerDao(Connection connection) {
         this.connection = connection;
     }
 

@@ -27,9 +27,9 @@ public class CheckAddProduct implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        Integer value = Integer.parseInt(request.getParameter("number"));
-        Product product = (Product) session.getAttribute("product");
-        Check check = (Check) session.getAttribute("check");
+        Integer value = Integer.parseInt(request.getParameter(Params.NUMBER));
+        Product product = (Product) session.getAttribute(Params.PRODUCT);
+        Check check = (Check) session.getAttribute(Params.CHECK);
 
         if (!productIsOnStock(product, value)) {
             return URI.REDIRECT + request.getServletPath() + URI.CHECK + URI.PRODUCT + Params.PARAM + Params.ERROR;
@@ -51,7 +51,7 @@ public class CheckAddProduct implements Command {
         }
 
         check.calculateTotalPrice();
-        session.removeAttribute("product");
+        session.removeAttribute(Params.PRODUCT);
         return URI.REDIRECT + request.getServletPath() + URI.CHECK;
     }
 
@@ -66,9 +66,6 @@ public class CheckAddProduct implements Command {
         try {
             stockService.updateStock(product, countOfProduct);
             return true;
-        } catch (TransactionException e) {
-            //log.error(TRANSACTION_ERROR);
-
         } catch (Exception e) {
             e.printStackTrace();
         }

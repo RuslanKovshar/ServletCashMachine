@@ -27,8 +27,8 @@ public class PaymentCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        Check check = (Check) session.getAttribute("check");
+        User user = (User) session.getAttribute(Params.USER);
+        Check check = (Check) session.getAttribute(Params.CHECK);
         String nameOnCard = request.getParameter(Params.NAME_ON_CARD);
         String cardNumber = request.getParameter(Params.CARD_NUMBER);
 
@@ -41,7 +41,7 @@ public class PaymentCommand implements Command {
         check.setUser(user);
         check.setBuyer(buyer);
         checkService.createCheck(check);
-        session.removeAttribute("check");
+        session.removeAttribute(Params.CHECK);
         return URI.REDIRECT + request.getServletPath() + URI.HOME;
     }
 }

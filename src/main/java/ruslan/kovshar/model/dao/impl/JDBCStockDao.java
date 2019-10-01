@@ -13,7 +13,7 @@ import java.util.Optional;
 public class JDBCStockDao implements StockDao {
     private Connection connection;
 
-    public JDBCStockDao(Connection connection) {
+    JDBCStockDao(Connection connection) {
         this.connection = connection;
     }
 

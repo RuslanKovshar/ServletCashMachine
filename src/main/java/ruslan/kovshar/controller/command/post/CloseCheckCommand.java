@@ -19,7 +19,7 @@ public class CloseCheckCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        Check check = (Check) session.getAttribute("check");
-        return URI.REDIRECT + request.getServletPath() + URI.PAYMENT + Params.PARAM + "value=" + check.getTotalPrice();
+        Check check = (Check) session.getAttribute(Params.CHECK);
+        return URI.REDIRECT + request.getServletPath() + URI.PAYMENT + Params.PARAM + Params.VALUE + "=" + check.getTotalPrice();
     }
 }

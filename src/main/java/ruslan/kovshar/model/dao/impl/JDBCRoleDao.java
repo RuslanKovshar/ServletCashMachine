@@ -13,7 +13,7 @@ import java.util.List;
 public class JDBCRoleDao implements RoleDao {
     private Connection connection;
 
-    public JDBCRoleDao(Connection connection) {
+    JDBCRoleDao(Connection connection) {
         this.connection = connection;
     }
 

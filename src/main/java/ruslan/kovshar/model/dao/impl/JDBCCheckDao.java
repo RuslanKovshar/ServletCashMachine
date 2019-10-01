@@ -15,7 +15,7 @@ import java.util.List;
 public class JDBCCheckDao implements CheckDao {
     private Connection connection;
 
-    public JDBCCheckDao(Connection connection) {
+    JDBCCheckDao(Connection connection) {
         this.connection = connection;
     }
 

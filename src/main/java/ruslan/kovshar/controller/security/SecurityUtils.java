@@ -1,17 +1,13 @@
 package ruslan.kovshar.controller.security;
 
-import ruslan.kovshar.model.entity.User;
 import ruslan.kovshar.model.enums.Roles;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class SecurityUtils {
 
-    // Проверить требует ли данный 'request' входа в систему или нет.
     public static boolean isSecurityPage(HttpServletRequest request) {
         String urlPattern = getUrlPattern(request);
 

@@ -36,7 +36,7 @@ public class MerchandiserProductCommand implements Command {
         validator.validate(productDTO);
 
         if (validator.hasErrors()) {
-            request.setAttribute("productDTO", productDTO);
+            request.setAttribute(Params.PRODUCT_DTO, productDTO);
             validator.getErrors().forEach(request::setAttribute);
             return Pages.MERCHANDISER_PAGE;
         }
@@ -47,7 +47,7 @@ public class MerchandiserProductCommand implements Command {
             stockService.addProductToStock(stock);
             return URI.REDIRECT + request.getServletPath() + URI.MERCHANDISER;
         } else {
-            request.setAttribute("productDTO", productDTO);
+            request.setAttribute(Params.PRODUCT_DTO, productDTO);
             request.setAttribute(Params.PRODUCT_EXIST, true);
             return Pages.MERCHANDISER_PAGE;
         }
@@ -65,10 +65,10 @@ public class MerchandiserProductCommand implements Command {
         String price = request.getParameter(Params.PRICE);
         Types type = Types.valueOf(request.getParameter(Params.TYPE));
         String count = request.getParameter(Params.COUNT_ON_STOCK);
-        return new ProductDTO(IntegerValidator.integerValidator(code),
+        return new ProductDTO(IntegerValidator.validate(code),
                 name,
                 price.equals("") ? BigDecimal.ZERO : new BigDecimal(price),
                 type,
-                IntegerValidator.integerValidator(count));
+                IntegerValidator.validate(count));
     }
 }

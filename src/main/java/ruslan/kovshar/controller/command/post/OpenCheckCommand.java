@@ -2,6 +2,7 @@ package ruslan.kovshar.controller.command.post;
 
 import ruslan.kovshar.controller.command.Command;
 import ruslan.kovshar.model.entity.Check;
+import ruslan.kovshar.view.Params;
 import ruslan.kovshar.view.URI;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +18,8 @@ public class OpenCheckCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        if (session.getAttribute("check") == null) {
-            session.setAttribute("check", new Check());
+        if (session.getAttribute(Params.CHECK) == null) {
+            session.setAttribute(Params.CHECK, new Check());
         }
         return URI.REDIRECT + request.getServletPath() + URI.CHECK;
     }

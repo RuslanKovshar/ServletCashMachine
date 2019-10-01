@@ -4,6 +4,7 @@ import ruslan.kovshar.controller.security.SecurityUtils;
 import ruslan.kovshar.controller.security.UserRoleRequestWrapper;
 import ruslan.kovshar.model.entity.User;
 import ruslan.kovshar.model.enums.Roles;
+import ruslan.kovshar.view.Params;
 import ruslan.kovshar.view.URI;
 
 import javax.servlet.*;
@@ -27,7 +28,7 @@ public class AuthenticationFilter implements Filter {
         final HttpServletResponse res = (HttpServletResponse) servletResponse;
 
         HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute(Params.USER);
 
         final String requestURI = req.getPathInfo();
 
@@ -47,8 +48,7 @@ public class AuthenticationFilter implements Filter {
         if (SecurityUtils.isSecurityPage(req)) {
             if (user == null) {
                 String reqUri = req.getRequestURI();
-                System.out.println(reqUri);
-                session.setAttribute("redirectURI", reqUri);
+                session.setAttribute(Params.REDIRECTED_URI, reqUri);
                 String servletPath = wrapRequest.getServletPath();
                 servletPath = servletPath.equals("/") ? "/api" : servletPath;
                 res.sendRedirect(wrapRequest.getContextPath() + servletPath + URI.LOGIN);
