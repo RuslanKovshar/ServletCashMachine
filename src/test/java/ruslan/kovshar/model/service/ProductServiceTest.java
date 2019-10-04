@@ -3,11 +3,17 @@ package ruslan.kovshar.model.service;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import ruslan.kovshar.controller.dto.ProductDTO;
 import ruslan.kovshar.database.DBInitializer;
+import ruslan.kovshar.model.dao.ProductDao;
 import ruslan.kovshar.model.entity.CountProduct;
 import ruslan.kovshar.model.entity.Product;
+import ruslan.kovshar.model.entity.WeightProduct;
 import ruslan.kovshar.model.enums.Types;
+import ruslan.kovshar.model.exceptions.ProductExistException;
 
 import java.math.BigDecimal;
 
@@ -15,50 +21,43 @@ import static org.junit.Assert.*;
 
 public class ProductServiceTest {
 
+    @Mock
     private ProductService productService;
 
-    @BeforeClass
-    public static void init() {
-        DBInitializer.initializeDatabase();
-    }
+    @Mock
+    private ProductDao productDao;
+
+    private Product product;
 
     @Before
     public void setUp() {
-        productService = ProductService.getInstance();
-    }
-
-    @Test
-    public void getInstance() {
-        assertNotNull(ProductService.getInstance());
-    }
-
-    @Test
-    public void createProduct() {
-        Product product = new CountProduct(256, "Cacao", BigDecimal.valueOf(26.99), Types.PIECE_PRODUCT);
-        product.setId(1L);
-        productService.createProduct(product);
+        MockitoAnnotations.initMocks(this);
+        product = new WeightProduct();
     }
 
     @Test
     public void findProductByCode() {
-        Product productByCode = productService.findProductByCode(222);
-        assertNotNull(productByCode);
+        Integer code = 222;
+        Mockito.when(productService.findProductByCode(code))
+                .thenReturn(product);
+
+        assertNotNull(productService.findProductByCode(code));
+        assertEquals(productService.findProductByCode(code),product);
     }
 
     @Test
     public void findProductByName() {
-        Product productByName = productService.findProductByName("Coca-cola");
-        assertNotNull(productByName);
+        String name = "Coca-cola";
+        Mockito.when(productService.findProductByName(name))
+                .thenReturn(product);
+
+        assertNotNull(productService.findProductByName(name));
+        assertEquals(productService.findProductByName(name),product);
     }
 
     @Test
-    public void testCreateProduct() {
-        ProductDTO productDTO = new ProductDTO(1337, "newProd", BigDecimal.TEN, Types.PIECE_PRODUCT, 5);
-        Product product = productService.createProduct(productDTO);
-        assertNotNull(product);
-        assertEquals(productDTO.getCode(), product.getCode());
-        assertEquals(productDTO.getName(), product.getName());
-        assertEquals(productDTO.getPrice(), product.getPrice());
-        assertEquals(productDTO.getType(), product.getType());
+    public void createProductFailed() {
+        Mockito.doThrow(ProductExistException.class).when(productDao).create(product);
+        assertFalse(productService.createProduct(product));
     }
 }

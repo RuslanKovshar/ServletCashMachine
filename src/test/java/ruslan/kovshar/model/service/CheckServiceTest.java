@@ -1,78 +1,65 @@
 package ruslan.kovshar.model.service;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import ruslan.kovshar.database.DBInitializer;
-import ruslan.kovshar.model.entity.Buyer;
+import org.mockito.MockitoAnnotations;
 import ruslan.kovshar.model.entity.Check;
 import ruslan.kovshar.model.entity.User;
 import ruslan.kovshar.model.pagination.Page;
 
-import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
 public class CheckServiceTest {
 
+    @Mock
     private CheckService checkService;
-
-    @BeforeClass
-    public static void init() {
-        DBInitializer.initializeDatabase();
-    }
 
     @Before
     public void setUp() {
-        checkService = CheckService.getInstance();
-    }
-
-    @Test
-    public void getInstance() {
-        assertNotNull(CheckService.getInstance());
-    }
-
-    @Test
-    public void createCheck() {
-        Check check = new Check();
-        check.setUser(new User.Builder().id(1L).build());
-        Buyer buyer = new Buyer();
-        buyer.setId(2L);
-        check.setBuyer(buyer);
-        check.setTotalPrice(BigDecimal.valueOf(100));
-        checkService.createCheck(check);
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
     public void getAllUserChecks() {
-        List<Check> allUserChecks = checkService.getAllUserChecks(new User.Builder().id(2L).build());
-        assertNotNull(allUserChecks);
-        assertEquals(allUserChecks.size(), 1);
-    }
+        List<Check> presentChecks = new ArrayList<>();
+        presentChecks.add(new Check());
+        User user = new User.Builder().id(2L).build();
+        Mockito.when(checkService.getAllUserChecks(user))
+                .thenReturn(presentChecks)
+                .thenReturn(Collections.emptyList())
+                .thenReturn(null);
 
-    @Test
-    public void deleteCheck() {
-        Check check = new Check();
-        Buyer buyer = new Buyer();
-        buyer.setId(1L);
-        check.setBuyer(buyer);
-        check.setId(1L);
-        checkService.deleteCheck(check);
+        assertEquals(checkService.getAllUserChecks(user), presentChecks);
+        assertEquals(checkService.getAllUserChecks(user), Collections.emptyList());
+        assertNull(checkService.getAllUserChecks(user));
     }
 
     @Test
     public void findCheckById() {
-        Check check = checkService.findCheckById(2L);
+        Check check = new Check();
+        check.setId(1L);
+        Mockito.when(checkService.findCheckById(1L))
+                .thenReturn(check);
         assertNotNull(check);
+        assertEquals(check.getId().intValue(),1L);
     }
 
     @Test
     public void findPageWithChecks() {
         Page pageInfo = new Page(1, 1, "ASC");
-        Page<Check> page = checkService.findPageWithChecks(new User.Builder().id(2L).build(), pageInfo);
-        assertNotNull(page);
-        assertEquals(page.getContent().size(), pageInfo.getMaxResult());
+        User user = new User.Builder().id(2L).build();
+        Page<Check> page = new Page<>();
+
+        Mockito.when(checkService.findPageWithChecks(user,pageInfo))
+                .thenReturn(page);
+
+        assertNotNull(checkService.findPageWithChecks(user,pageInfo));
+        assertEquals(checkService.findPageWithChecks(user,pageInfo),page);
     }
 }
