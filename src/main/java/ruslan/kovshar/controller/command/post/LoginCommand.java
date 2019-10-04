@@ -19,7 +19,7 @@ public class LoginCommand implements Command {
      * checks the user and set him to session
      *
      * @param request http servlet request
-     * @return redirect to redirectURI if user exist,
+     * @return redirect to home page if user exist,
      * redirect to login page with error if not
      */
     @Override
@@ -31,10 +31,7 @@ public class LoginCommand implements Command {
         if (checkUserForLogin.isPresent()) {
             User user = checkUserForLogin.get();
             session.setAttribute(Params.USER, user);
-            String redirectURI = (String) session.getAttribute(Params.REDIRECTED_URI);
-            if (redirectURI == null || redirectURI.equals(URI.HOME)) redirectURI = URI.API + URI.HOME;
-            session.removeAttribute(Params.REDIRECTED_URI);
-            return URI.REDIRECT + redirectURI;
+            return URI.REDIRECT + request.getServletPath() + URI.HOME;
         } else {
             return URI.REDIRECT + request.getServletPath() + URI.LOGIN + Params.PARAM + Params.ERROR;
         }

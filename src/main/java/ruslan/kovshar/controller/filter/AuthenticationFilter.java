@@ -47,8 +47,6 @@ public class AuthenticationFilter implements Filter {
 
         if (SecurityUtils.isSecurityPage(req)) {
             if (user == null) {
-                String reqUri = req.getRequestURI();
-                session.setAttribute(Params.REDIRECTED_URI, reqUri);
                 String servletPath = wrapRequest.getServletPath();
                 servletPath = servletPath.equals("/") ? "/api" : servletPath;
                 res.sendRedirect(wrapRequest.getContextPath() + servletPath + URI.LOGIN);

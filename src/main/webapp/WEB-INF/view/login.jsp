@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="container mt-5" style="width: 40%">
-    <form class="form-signin" method="post" action="${pageContext.request.contextPath}/api/login?redirectURI=${sessionScope.redirectURI}">
+    <form class="form-signin" method="post" action="${pageContext.request.contextPath}/api/login">
         <c:if test="${requestScope.error}">
             <div class="alert alert-danger">
                 <fmt:message key="after.error.message"/>
