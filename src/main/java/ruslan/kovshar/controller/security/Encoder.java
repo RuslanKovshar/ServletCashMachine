@@ -1,5 +1,8 @@
 package ruslan.kovshar.controller.security;
 
+import org.apache.log4j.Logger;
+import ruslan.kovshar.controller.command.post.MerchandiserStockCommand;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -7,6 +10,8 @@ import java.security.NoSuchAlgorithmException;
  * encodes password
  */
 public class Encoder {
+
+    private static final Logger log = Logger.getLogger(Encoder.class);
 
     public static String encodePassword(String password) {
         String hashedPassword;
@@ -20,7 +25,7 @@ public class Encoder {
             }
             hashedPassword = sb.toString();
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            log.error(e);
             throw new RuntimeException();
         }
         return hashedPassword;

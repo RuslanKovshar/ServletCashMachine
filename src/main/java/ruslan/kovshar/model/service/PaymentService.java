@@ -8,7 +8,7 @@ import ruslan.kovshar.model.entity.User;
 
 public class PaymentService {
 
-    private static PaymentService instance;
+    private static volatile PaymentService instance;
     private DaoFactory daoFactory = DaoFactory.getInstance();
 
     private PaymentService() {
@@ -34,10 +34,9 @@ public class PaymentService {
      * @param buyer buyer
      * @param user  user
      */
-    //TODO: заменить транзакцией(сделать красиво)
     public void makePay(Buyer buyer, User user) {
-        try (final BuyerDao buyerDao = daoFactory.createBuyerDao();
-             final UserDao userDao = daoFactory.createUserDao()) {
+        try (BuyerDao buyerDao = daoFactory.createBuyerDao();
+             UserDao userDao = daoFactory.createUserDao()) {
             userDao.update(user);
             buyerDao.create(buyer);
         }
@@ -48,9 +47,8 @@ public class PaymentService {
      *
      * @param user user
      */
-    //TODO:
     public void returnMoney(User user) {
-        try (final UserDao userDao = daoFactory.createUserDao()) {
+        try (UserDao userDao = daoFactory.createUserDao()) {
             userDao.update(user);
         }
     }

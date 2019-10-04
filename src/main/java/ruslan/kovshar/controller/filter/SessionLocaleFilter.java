@@ -1,9 +1,8 @@
 package ruslan.kovshar.controller.filter;
 
-import ruslan.kovshar.view.Params;
+import ruslan.kovshar.textconstants.Params;
 
 import javax.servlet.*;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

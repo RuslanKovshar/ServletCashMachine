@@ -1,4 +1,4 @@
-<%@ page import="ruslan.kovshar.view.Params" %>
+<%@ page import="ruslan.kovshar.textconstants.Params" %>
 <%@include file="parts/header.jsp" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 

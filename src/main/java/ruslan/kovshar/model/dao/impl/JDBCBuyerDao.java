@@ -1,8 +1,9 @@
 package ruslan.kovshar.model.dao.impl;
 
+import org.apache.log4j.Logger;
 import ruslan.kovshar.model.dao.BuyerDao;
 import ruslan.kovshar.model.entity.Buyer;
-import ruslan.kovshar.view.SQL;
+import ruslan.kovshar.textconstants.SQL;
 
 import java.sql.*;
 import java.util.List;
@@ -11,6 +12,8 @@ import java.util.List;
  * serves to access buyer in database
  */
 public class JDBCBuyerDao implements BuyerDao {
+
+    private static final Logger log = Logger.getLogger(JDBCBuyerDao.class);
 
     private Connection connection;
 
@@ -30,23 +33,23 @@ public class JDBCBuyerDao implements BuyerDao {
                 entity.setId(generatedKeys.getLong(1));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
 
     @Override
     public Buyer findById(Long id) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public List<Buyer> findAll() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void update(Buyer entity) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -55,7 +58,7 @@ public class JDBCBuyerDao implements BuyerDao {
             ps.setLong(1, id);
             ps.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
 
@@ -64,7 +67,7 @@ public class JDBCBuyerDao implements BuyerDao {
         try {
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
 }

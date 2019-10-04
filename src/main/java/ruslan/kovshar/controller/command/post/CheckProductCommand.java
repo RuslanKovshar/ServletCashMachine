@@ -1,15 +1,18 @@
 package ruslan.kovshar.controller.command.post;
 
+import org.apache.log4j.Logger;
 import ruslan.kovshar.controller.command.Command;
 import ruslan.kovshar.model.entity.Product;
 import ruslan.kovshar.model.service.ProductService;
 import ruslan.kovshar.controller.validator.IntegerValidator;
-import ruslan.kovshar.view.Params;
-import ruslan.kovshar.view.URI;
+import ruslan.kovshar.textconstants.Params;
+import ruslan.kovshar.textconstants.URI;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class CheckProductCommand implements Command {
+
+    private static final Logger log = Logger.getLogger(CheckProductCommand.class);
 
     private ProductService productService = ProductService.getInstance();
 
@@ -34,7 +37,7 @@ public class CheckProductCommand implements Command {
             }
             request.getSession().setAttribute(Params.PRODUCT, product);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
             return URI.REDIRECT + request.getServletPath() + URI.CHECK + Params.PARAM + Params.ERROR;
         }
         return URI.REDIRECT + request.getServletPath() + URI.CHECK + URI.PRODUCT;

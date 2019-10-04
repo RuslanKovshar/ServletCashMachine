@@ -1,10 +1,11 @@
 package ruslan.kovshar.model.dao.impl;
 
+import org.apache.log4j.Logger;
 import ruslan.kovshar.model.dao.StockDao;
 import ruslan.kovshar.model.dao.mapper.StockMapper;
 import ruslan.kovshar.model.entity.Product;
 import ruslan.kovshar.model.entity.Stock;
-import ruslan.kovshar.view.SQL;
+import ruslan.kovshar.textconstants.SQL;
 
 import java.sql.*;
 import java.util.List;
@@ -14,6 +15,9 @@ import java.util.Optional;
  * serves to access stock in database
  */
 public class JDBCStockDao implements StockDao {
+
+    private static final Logger log = Logger.getLogger(JDBCStockDao.class);
+
     private Connection connection;
 
     JDBCStockDao(Connection connection) {
@@ -28,18 +32,18 @@ public class JDBCStockDao implements StockDao {
             ps.setLong(2, entity.getProduct().getId());
             ps.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
 
     @Override
     public Stock findById(Long id) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public List<Stock> findAll() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -49,13 +53,13 @@ public class JDBCStockDao implements StockDao {
             ps.setLong(2, entity.getProduct().getId());
             ps.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
 
     @Override
     public void delete(Long id) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -63,7 +67,7 @@ public class JDBCStockDao implements StockDao {
         try {
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
 
@@ -78,7 +82,7 @@ public class JDBCStockDao implements StockDao {
                 result = Optional.of(stockMapper.extractFromResultSet(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return result;
     }

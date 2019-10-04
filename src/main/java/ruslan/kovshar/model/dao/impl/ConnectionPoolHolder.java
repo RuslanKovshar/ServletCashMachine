@@ -3,20 +3,19 @@ package ruslan.kovshar.model.dao.impl;
 import org.apache.commons.dbcp.BasicDataSource;
 
 import javax.sql.DataSource;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import static ruslan.kovshar.view.DatabaseProps.*;
+import static ruslan.kovshar.textconstants.DatabaseProps.*;
 
 /**
  * contains the data source
  */
-class ConnectionPoolHolder {
+public class ConnectionPoolHolder {
     private static volatile DataSource dataSource;
 
-    static DataSource getDataSource() {
+    public static DataSource getDataSource() {
         if (dataSource == null) {
             synchronized (DataSource.class) {
                 if (dataSource == null){

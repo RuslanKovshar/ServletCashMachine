@@ -1,11 +1,13 @@
 package ruslan.kovshar.model.dao.impl;
 
+import org.apache.log4j.Logger;
+import ruslan.kovshar.controller.security.Encoder;
 import ruslan.kovshar.model.dao.UserDao;
 import ruslan.kovshar.model.dao.mapper.RoleMapper;
 import ruslan.kovshar.model.dao.mapper.UserMapper;
 import ruslan.kovshar.model.entity.User;
 import ruslan.kovshar.model.exceptions.UserExistException;
-import ruslan.kovshar.view.SQL;
+import ruslan.kovshar.textconstants.SQL;
 
 import java.sql.*;
 import java.util.List;
@@ -15,6 +17,9 @@ import java.util.Optional;
  * serves to access user in database
  */
 public class JDBCUserDao implements UserDao {
+
+    private static final Logger log = Logger.getLogger(JDBCUserDao.class);
+
     private Connection connection;
 
     JDBCUserDao(Connection connection) {
@@ -41,7 +46,7 @@ public class JDBCUserDao implements UserDao {
             }
             result = Optional.ofNullable(user);
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return result;
     }
@@ -64,19 +69,19 @@ public class JDBCUserDao implements UserDao {
                 entity.setId(generatedKeys.getLong(1));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
             throw new UserExistException();
         }
     }
 
     @Override
     public User findById(Long id) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public List<User> findAll() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -93,13 +98,13 @@ public class JDBCUserDao implements UserDao {
             preparedStatement.setLong(8, entity.getId());
             preparedStatement.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
 
     @Override
     public void delete(Long id) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -107,7 +112,7 @@ public class JDBCUserDao implements UserDao {
         try {
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
 }

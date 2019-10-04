@@ -5,13 +5,13 @@ import ruslan.kovshar.model.dao.StockDao;
 import ruslan.kovshar.model.entity.Product;
 import ruslan.kovshar.model.entity.Stock;
 import ruslan.kovshar.model.exceptions.ResourceNotFoundException;
-import ruslan.kovshar.model.exceptions.TransactionException;
+import ruslan.kovshar.model.exceptions.NotEnoughProductException;
 
-import static ruslan.kovshar.view.ExceptionMessages.STOCK_NOT_FOUND;
+import static ruslan.kovshar.textconstants.ExceptionMessages.STOCK_NOT_FOUND;
 
 public class StockService {
 
-    private static StockService instance;
+    private static volatile StockService instance;
     private DaoFactory daoFactory = DaoFactory.getInstance();
 
     private StockService() {
@@ -42,23 +42,24 @@ public class StockService {
         }
     }
 
+
     /**
      * updates count of product in the stock
      *
      * @param product product
      * @param count   count of product
-     * @throws ResourceNotFoundException if no product in stock,
-     *                                   TransactionException if no such count of product in stock
+     * @throws ResourceNotFoundException occurs if product was not found on stock
+     * @throws NotEnoughProductException occurs if count of product is not enough
      */
-    public void updateStock(Product product, Integer count) throws Exception {
-        try (final StockDao stockDao = daoFactory.createStockDao()) {
+    public void updateStock(Product product, Integer count) throws ResourceNotFoundException, NotEnoughProductException {
+        try (StockDao stockDao = daoFactory.createStockDao()) {
             final Stock stock = stockDao.findByProduct(product)
                     .orElseThrow(() -> new ResourceNotFoundException(STOCK_NOT_FOUND));
             stock.setProduct(product);
             final Integer oldCount = stock.getCountOfProduct();
             int newCount = oldCount - count;
             if (newCount < 0) {
-                throw new TransactionException();
+                throw new NotEnoughProductException();
             }
             stock.setCountOfProduct(newCount);
             stockDao.update(stock);

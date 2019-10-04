@@ -1,12 +1,13 @@
 package ruslan.kovshar.model.dao.impl;
 
+import org.apache.log4j.Logger;
 import ruslan.kovshar.model.dao.CheckDao;
 import ruslan.kovshar.model.dao.mapper.BuyerMapper;
 import ruslan.kovshar.model.dao.mapper.CheckMapper;
 import ruslan.kovshar.model.entity.Check;
 import ruslan.kovshar.model.entity.User;
 import ruslan.kovshar.model.pagination.Page;
-import ruslan.kovshar.view.SQL;
+import ruslan.kovshar.textconstants.SQL;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,6 +17,9 @@ import java.util.List;
  * serves to access check in database
  */
 public class JDBCCheckDao implements CheckDao {
+
+    private static final Logger log = Logger.getLogger(JDBCCheckDao.class);
+
     private Connection connection;
 
     JDBCCheckDao(Connection connection) {
@@ -35,7 +39,7 @@ public class JDBCCheckDao implements CheckDao {
                 entity.setId(generatedKeys.getLong(1));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
 
@@ -52,7 +56,7 @@ public class JDBCCheckDao implements CheckDao {
                 check.setBuyer(buyerMapper.extractFromResultSet(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return check;
     }
@@ -67,14 +71,14 @@ public class JDBCCheckDao implements CheckDao {
                 checks.add(mapper.extractFromResultSet(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return checks;
     }
 
     @Override
     public void update(Check entity) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -83,7 +87,7 @@ public class JDBCCheckDao implements CheckDao {
             ps.setLong(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
 
@@ -92,7 +96,7 @@ public class JDBCCheckDao implements CheckDao {
         try {
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
 
@@ -111,7 +115,7 @@ public class JDBCCheckDao implements CheckDao {
                 checks.add(check);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return checks;
     }
@@ -144,7 +148,7 @@ public class JDBCCheckDao implements CheckDao {
                 page.getContent().add(check);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return page;
     }

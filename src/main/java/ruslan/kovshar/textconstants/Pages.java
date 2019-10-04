@@ -1,4 +1,4 @@
-package ruslan.kovshar.view;
+package ruslan.kovshar.textconstants;
 
 /**
  * contains pages paths

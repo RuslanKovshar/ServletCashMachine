@@ -1,9 +1,10 @@
 package ruslan.kovshar.model.dao.impl;
 
+import org.apache.log4j.Logger;
 import ruslan.kovshar.model.dao.RoleDao;
 import ruslan.kovshar.model.entity.User;
 import ruslan.kovshar.model.enums.Roles;
-import ruslan.kovshar.view.SQL;
+import ruslan.kovshar.textconstants.SQL;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,6 +15,9 @@ import java.util.List;
  * serves to access role in database
  */
 public class JDBCRoleDao implements RoleDao {
+
+    private static final Logger log = Logger.getLogger(JDBCRoleDao.class);
+
     private Connection connection;
 
     JDBCRoleDao(Connection connection) {
@@ -27,33 +31,33 @@ public class JDBCRoleDao implements RoleDao {
             ps.setString(2, role.name());
             ps.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
 
     @Override
     public void create(Roles entity) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Roles findById(Long id) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public List<Roles> findAll() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void update(Roles entity) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void delete(Long id) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -61,7 +65,7 @@ public class JDBCRoleDao implements RoleDao {
         try {
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
 }

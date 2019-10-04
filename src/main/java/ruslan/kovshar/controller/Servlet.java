@@ -2,8 +2,8 @@ package ruslan.kovshar.controller;
 
 import ruslan.kovshar.controller.command.Command;
 import ruslan.kovshar.controller.command.CommandHolder;
-import ruslan.kovshar.view.Pages;
-import ruslan.kovshar.view.URI;
+import ruslan.kovshar.textconstants.Pages;
+import ruslan.kovshar.textconstants.URI;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

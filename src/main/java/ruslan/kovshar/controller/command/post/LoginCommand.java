@@ -4,8 +4,8 @@ import ruslan.kovshar.controller.command.Command;
 import ruslan.kovshar.controller.security.Encoder;
 import ruslan.kovshar.model.entity.User;
 import ruslan.kovshar.model.service.UserService;
-import ruslan.kovshar.view.Params;
-import ruslan.kovshar.view.URI;
+import ruslan.kovshar.textconstants.Params;
+import ruslan.kovshar.textconstants.URI;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

@@ -1,18 +1,21 @@
 package ruslan.kovshar.controller.command.post;
 
+import org.apache.log4j.Logger;
 import ruslan.kovshar.controller.command.Command;
 import ruslan.kovshar.model.entity.Check;
 import ruslan.kovshar.model.entity.User;
 import ruslan.kovshar.model.service.CheckService;
 import ruslan.kovshar.model.service.PaymentService;
 import ruslan.kovshar.model.service.StockService;
-import ruslan.kovshar.view.Params;
-import ruslan.kovshar.view.URI;
+import ruslan.kovshar.textconstants.Params;
+import ruslan.kovshar.textconstants.URI;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 
 public class CancelCheckCommand implements Command {
+
+    private static final Logger log = Logger.getLogger(CancelCheckCommand.class);
 
     private CheckService checkService = CheckService.getInstance();
     private StockService stockService = StockService.getInstance();
@@ -33,7 +36,7 @@ public class CancelCheckCommand implements Command {
             try {
                 stockService.updateStock(productInCheck.getProduct(), -productInCheck.getValue());
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error(e);
             }
         });
         user.setUserCash(user.getUserCash().subtract(check.getTotalPrice().multiply(BigDecimal.valueOf(-1))));

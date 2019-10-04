@@ -1,18 +1,20 @@
 package ruslan.kovshar.controller.command.post;
 
+import org.apache.log4j.Logger;
 import ruslan.kovshar.controller.command.Command;
 import ruslan.kovshar.model.entity.Check;
 import ruslan.kovshar.model.entity.ProductInCheck;
-import ruslan.kovshar.model.exceptions.TransactionException;
 import ruslan.kovshar.model.service.StockService;
-import ruslan.kovshar.view.Params;
-import ruslan.kovshar.view.URI;
+import ruslan.kovshar.textconstants.Params;
+import ruslan.kovshar.textconstants.URI;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 public class CheckRemoveProductCommand implements Command {
+
+    private static final Logger log = Logger.getLogger(CheckRemoveProductCommand.class);
 
     private StockService stockService = StockService.getInstance();
 
@@ -40,7 +42,7 @@ public class CheckRemoveProductCommand implements Command {
             try {
                 stockService.updateStock(checkProduct.getProduct(), -checkProduct.getValue());
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error(e);
                 return URI.REDIRECT + request.getServletPath() + URI.CHECK + URI.PRODUCT + Params.PARAM + Params.ERROR;
             }
         }

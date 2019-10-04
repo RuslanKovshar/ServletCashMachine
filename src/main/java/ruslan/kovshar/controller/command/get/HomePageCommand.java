@@ -1,7 +1,7 @@
 package ruslan.kovshar.controller.command.get;
 
 import ruslan.kovshar.controller.command.Command;
-import ruslan.kovshar.view.Pages;
+import ruslan.kovshar.textconstants.Pages;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -1,19 +1,24 @@
 package ruslan.kovshar.model.service;
 
+import org.apache.log4j.Logger;
 import ruslan.kovshar.controller.dto.UserDTO;
 import ruslan.kovshar.controller.security.Encoder;
 import ruslan.kovshar.model.dao.DaoFactory;
 import ruslan.kovshar.model.dao.RoleDao;
 import ruslan.kovshar.model.dao.UserDao;
+import ruslan.kovshar.model.dao.impl.JDBCUserDao;
 import ruslan.kovshar.model.entity.User;
 import ruslan.kovshar.model.enums.Roles;
 import ruslan.kovshar.model.exceptions.UserExistException;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 public class UserService {
 
-    private static UserService instance;
+    private static final Logger log = Logger.getLogger(UserService.class);
+
+    private static volatile UserService instance;
     private DaoFactory daoFactory = DaoFactory.getInstance();
 
     private UserService() {
@@ -47,7 +52,7 @@ public class UserService {
             roleDao.setUserRole(user, role);
             return true;
         } catch (UserExistException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return false;
     }
@@ -91,6 +96,7 @@ public class UserService {
                 .firstNameUA(userDTO.getFirstNameUA())
                 .secondNameEN(userDTO.getSecondNameEN())
                 .secondNameUA(userDTO.getSecondNameUA())
+                .userCash(BigDecimal.ZERO)
                 .build();
     }
 }

@@ -1,10 +1,11 @@
 package ruslan.kovshar.model.dao.impl;
 
+import org.apache.log4j.Logger;
 import ruslan.kovshar.model.dao.ProductInCheckDao;
 import ruslan.kovshar.model.dao.mapper.ProductInCheckMapper;
 import ruslan.kovshar.model.entity.Check;
 import ruslan.kovshar.model.entity.ProductInCheck;
-import ruslan.kovshar.view.SQL;
+import ruslan.kovshar.textconstants.SQL;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,6 +19,8 @@ import java.util.Set;
  * serves to access product in check in database
  */
 public class JDBCProductInCheckDao implements ProductInCheckDao {
+
+    private static final Logger log = Logger.getLogger(JDBCProductInCheckDao.class);
 
     private Connection connection;
 
@@ -34,28 +37,28 @@ public class JDBCProductInCheckDao implements ProductInCheckDao {
             ps.setLong(4, entity.getProduct().getId());
             ps.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
 
     @Override
     public ProductInCheck findById(Long id) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public List<ProductInCheck> findAll() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void update(ProductInCheck entity) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void delete(Long id) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -63,7 +66,7 @@ public class JDBCProductInCheckDao implements ProductInCheckDao {
         try {
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
 
@@ -78,7 +81,7 @@ public class JDBCProductInCheckDao implements ProductInCheckDao {
                 result.add(mapper.extractFromResultSet(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return result;
     }

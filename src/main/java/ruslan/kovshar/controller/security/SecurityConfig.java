@@ -1,7 +1,7 @@
 package ruslan.kovshar.controller.security;
 
 import ruslan.kovshar.model.enums.Roles;
-import ruslan.kovshar.view.URI;
+import ruslan.kovshar.textconstants.URI;
 
 import java.util.*;
 
@@ -10,16 +10,26 @@ import java.util.*;
  */
 class SecurityConfig {
     private static Map<Roles, List<String>> pagesByRoles = new HashMap<>();
-    private static List<String> pagesForAllUsers = new ArrayList<>();
 
     static {
-        pagesForAllUsers.addAll(Arrays.asList(URI.LOGIN, URI.LOGOUT));
+        pagesByRoles.put(Roles.CASHIER, Arrays.asList(URI.HOME,
+                URI.OPEN_CHECK,
+                URI.CLOSE_CHECK,
+                URI.ADD_PRODUCT));
 
-        pagesByRoles.put(Roles.CASHIER, Arrays.asList(URI.HOME));
+        pagesByRoles.put(Roles.MERCHANDISER, Arrays.asList(URI.HOME,
+                URI.MERCHANDISER,
+                URI.MERCHANDISER + URI.STOCK,
+                URI.MERCHANDISER + URI.PRODUCT));
 
-        pagesByRoles.put(Roles.MERCHANDISER, Arrays.asList(URI.MERCHANDISER));
-
-        pagesByRoles.put(Roles.SENIOR_CASHIER, Arrays.asList(URI.Z_REPORT, URI.X_REPORT));
+        pagesByRoles.put(Roles.SENIOR_CASHIER, Arrays.asList(URI.HOME,
+                URI.CHECKS,
+                URI.OPEN_CHECK,
+                URI.CLOSE_CHECK,
+                URI.PRODUCT,
+                URI.CANCEL_CHECK,
+                URI.Z_REPORT,
+                URI.X_REPORT));
     }
 
     static Set<Roles> getAllAppRoles() {

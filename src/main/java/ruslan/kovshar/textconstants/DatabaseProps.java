@@ -1,4 +1,4 @@
-package ruslan.kovshar.view;
+package ruslan.kovshar.textconstants;
 
 public interface DatabaseProps {
     String DATABASE_PROPERTIES = "database.properties";

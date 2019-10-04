@@ -10,9 +10,9 @@ import ruslan.kovshar.model.entity.Stock;
 import ruslan.kovshar.model.enums.Types;
 import ruslan.kovshar.model.service.ProductService;
 import ruslan.kovshar.model.service.StockService;
-import ruslan.kovshar.view.Pages;
-import ruslan.kovshar.view.Params;
-import ruslan.kovshar.view.URI;
+import ruslan.kovshar.textconstants.Pages;
+import ruslan.kovshar.textconstants.Params;
+import ruslan.kovshar.textconstants.URI;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;

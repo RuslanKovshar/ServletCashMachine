@@ -1,12 +1,11 @@
 package ruslan.kovshar.controller.validator;
 
 import ruslan.kovshar.controller.dto.UserDTO;
-import ruslan.kovshar.model.entity.User;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static ruslan.kovshar.view.ValidationMessages.*;
+import static ruslan.kovshar.textconstants.ValidationMessages.*;
 
 /**
  * validates user info

@@ -1,4 +1,4 @@
-package ruslan.kovshar.view;
+package ruslan.kovshar.textconstants;
 
 /**
  * contains sql queries
@@ -7,7 +7,7 @@ public interface SQL {
     /*Sql queries for Users*/
     String INSERT_NEW_USER = "INSERT INTO users (email,password,first_name_ua,second_name_ua,first_name_en,second_name_en,cash) VALUES (?,?,?,?,?,?,?)";
     String SELECT_USER_BY_EMAIL_AND_PASSWORD = "SELECT * from users JOIN user_roles ON users.id = user_roles.user_id WHERE email = ? AND password = ?";
-    String UPDATE_USER = "UPDATE cash_machine_servlet.users SET " +
+    String UPDATE_USER = "UPDATE users SET " +
             "email = ?, " +
             "password =?, " +
             "first_name_ua = ?, " +

@@ -2,8 +2,8 @@ package ruslan.kovshar.controller.command;
 
 import ruslan.kovshar.controller.command.get.*;
 import ruslan.kovshar.controller.command.post.*;
-import ruslan.kovshar.view.TextConstants;
-import ruslan.kovshar.view.URI;
+import ruslan.kovshar.textconstants.TextConstants;
+import ruslan.kovshar.textconstants.URI;
 
 import java.util.Map;
 

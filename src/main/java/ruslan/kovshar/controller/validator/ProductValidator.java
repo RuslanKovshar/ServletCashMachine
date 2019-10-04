@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-import static ruslan.kovshar.view.ValidationMessages.*;
+import static ruslan.kovshar.textconstants.ValidationMessages.*;
 
 /**
  * validates product info

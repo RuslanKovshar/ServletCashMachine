@@ -6,8 +6,8 @@ import ruslan.kovshar.model.entity.Check;
 import ruslan.kovshar.model.entity.User;
 import ruslan.kovshar.model.service.CheckService;
 import ruslan.kovshar.model.service.PaymentService;
-import ruslan.kovshar.view.Params;
-import ruslan.kovshar.view.URI;
+import ruslan.kovshar.textconstants.Params;
+import ruslan.kovshar.textconstants.URI;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

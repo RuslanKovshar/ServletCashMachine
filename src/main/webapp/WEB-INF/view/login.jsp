@@ -1,12 +1,6 @@
-<%@ page import="ruslan.kovshar.view.Params" %>
+<%@ page import="ruslan.kovshar.textconstants.Params" %>
 <%@include file="parts/header.jsp" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<c:if test="${sessionScope.redirectURI != null}">
-    <div class="alert alert-warning">
-        <c:out value="${sessionScope.redirectURI}"/>
-    </div>
-</c:if>
 
 <div class="container mt-5" style="width: 40%">
     <form class="form-signin" method="post" action="${pageContext.request.contextPath}/api/login?redirectURI=${sessionScope.redirectURI}">
@@ -36,11 +30,6 @@
             <input type="password" id="password" name=<%= Params.PASSWORD %> class="form-control" placeholder="Password"
                    required>
         </p>
-
-
-        <%--<label for="remember-me"><@spring.message "remember.me.message"/></label>
-        <input id="remember-me" type="checkbox" name="remember-me" value="true"/>--%>
-
 
         <button class="btn btn-lg btn-dark btn-block" type="submit"><fmt:message key="login.message"/></button>
     </form>

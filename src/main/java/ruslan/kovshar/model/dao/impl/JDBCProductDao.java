@@ -1,10 +1,11 @@
 package ruslan.kovshar.model.dao.impl;
 
+import org.apache.log4j.Logger;
 import ruslan.kovshar.model.dao.ProductDao;
 import ruslan.kovshar.model.dao.mapper.ProductMapper;
 import ruslan.kovshar.model.entity.Product;
 import ruslan.kovshar.model.exceptions.ProductExistException;
-import ruslan.kovshar.view.SQL;
+import ruslan.kovshar.textconstants.SQL;
 
 import java.sql.*;
 import java.util.List;
@@ -14,6 +15,9 @@ import java.util.Optional;
  * serves to access product in database
  */
 public class JDBCProductDao implements ProductDao {
+
+    private static final Logger log = Logger.getLogger(JDBCProductDao.class);
+
     private Connection connection;
 
     JDBCProductDao(Connection connection) {
@@ -35,7 +39,7 @@ public class JDBCProductDao implements ProductDao {
                 entity.setId(generatedKeys.getLong(1));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
             throw new ProductExistException();
         }
 
@@ -43,22 +47,22 @@ public class JDBCProductDao implements ProductDao {
 
     @Override
     public Product findById(Long id) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public List<Product> findAll() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void update(Product entity) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void delete(Long id) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -66,7 +70,7 @@ public class JDBCProductDao implements ProductDao {
         try {
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
 
@@ -81,7 +85,7 @@ public class JDBCProductDao implements ProductDao {
                 result = Optional.of(mapper.extractFromResultSet(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return result;
     }
@@ -97,7 +101,7 @@ public class JDBCProductDao implements ProductDao {
                 result = Optional.of(mapper.extractFromResultSet(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return result;
     }

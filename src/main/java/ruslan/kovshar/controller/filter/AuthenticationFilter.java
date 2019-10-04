@@ -4,8 +4,8 @@ import ruslan.kovshar.controller.security.SecurityUtils;
 import ruslan.kovshar.controller.security.UserRoleRequestWrapper;
 import ruslan.kovshar.model.entity.User;
 import ruslan.kovshar.model.enums.Roles;
-import ruslan.kovshar.view.Params;
-import ruslan.kovshar.view.URI;
+import ruslan.kovshar.textconstants.Params;
+import ruslan.kovshar.textconstants.URI;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

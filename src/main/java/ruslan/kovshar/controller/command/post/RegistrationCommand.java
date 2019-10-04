@@ -7,9 +7,9 @@ import ruslan.kovshar.controller.validator.Validator;
 import ruslan.kovshar.model.entity.User;
 import ruslan.kovshar.model.enums.Roles;
 import ruslan.kovshar.model.service.UserService;
-import ruslan.kovshar.view.Pages;
-import ruslan.kovshar.view.Params;
-import ruslan.kovshar.view.URI;
+import ruslan.kovshar.textconstants.Pages;
+import ruslan.kovshar.textconstants.Params;
+import ruslan.kovshar.textconstants.URI;
 
 import javax.servlet.http.HttpServletRequest;
 

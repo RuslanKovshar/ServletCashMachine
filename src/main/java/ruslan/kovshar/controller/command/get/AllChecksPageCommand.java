@@ -5,8 +5,8 @@ import ruslan.kovshar.model.entity.User;
 import ruslan.kovshar.model.pagination.Page;
 import ruslan.kovshar.model.service.CheckService;
 import ruslan.kovshar.controller.validator.IntegerValidator;
-import ruslan.kovshar.view.Pages;
-import ruslan.kovshar.view.Params;
+import ruslan.kovshar.textconstants.Pages;
+import ruslan.kovshar.textconstants.Params;
 
 import javax.servlet.http.HttpServletRequest;
 

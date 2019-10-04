@@ -2,8 +2,8 @@ package ruslan.kovshar.controller.command.post;
 
 import ruslan.kovshar.controller.command.Command;
 import ruslan.kovshar.model.entity.Check;
-import ruslan.kovshar.view.Params;
-import ruslan.kovshar.view.URI;
+import ruslan.kovshar.textconstants.Params;
+import ruslan.kovshar.textconstants.URI;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
