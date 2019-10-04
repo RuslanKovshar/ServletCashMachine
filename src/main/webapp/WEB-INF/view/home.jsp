@@ -57,4 +57,12 @@
         </button>
     </form>
 </c:if>
+
+<c:if test="${sessionScope.user.isAdmin()}">
+    <form action="${pageContext.request.contextPath}/api/users">
+        <button class="btn btn-lg btn-success btn-block mt-2">
+            <fmt:message key="users.message"/>
+        </button>
+    </form>
+</c:if>
 <%@include file="parts/footer.jsp" %>

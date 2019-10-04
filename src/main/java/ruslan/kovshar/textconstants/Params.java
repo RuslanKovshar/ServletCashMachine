@@ -38,8 +38,8 @@ public interface Params {
     String NUMBER = "number";
     String PRODUCT = "product";
     String CHECK = "check";
-    String REDIRECTED_URI = "redirectURI";
     String PRODUCT_DTO = "productDTO";
-
+    String USERS = "users";
     String LANG = "lang";
+    String ROLES = "roles";
 }

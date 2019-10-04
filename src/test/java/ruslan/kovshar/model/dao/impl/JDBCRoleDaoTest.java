@@ -61,4 +61,9 @@ public class JDBCRoleDaoTest {
     public void delete() {
         roleDao.delete(3L);
     }
+
+    @Test
+    public void deleteUserRole() {
+        roleDao.deleteUserRole(new User.Builder().id(1L).build());
+    }
 }

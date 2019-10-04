@@ -30,6 +30,11 @@ class SecurityConfig {
                 URI.CANCEL_CHECK,
                 URI.Z_REPORT,
                 URI.X_REPORT));
+
+        pagesByRoles.put(Roles.ADMIN, Arrays.asList(
+                URI.USERS,
+                URI.USER
+        ));
     }
 
     static Set<Roles> getAllAppRoles() {

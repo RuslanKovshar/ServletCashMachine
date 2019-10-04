@@ -14,4 +14,11 @@ public interface RoleDao extends GenericDao<Roles> {
      * @param role role
      */
     void setUserRole(User user, Roles role);
+
+    /**
+     * deletes user role
+     *
+     * @param user user
+     */
+    void deleteUserRole(User user);
 }

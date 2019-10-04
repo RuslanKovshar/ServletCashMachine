@@ -16,10 +16,12 @@ public interface SQL {
             "second_name_en = ?," +
             "cash = ? " +
             "WHERE id = ?";
+    String SELECT_ALL_USERS = "SELECT * FROM users JOIN user_roles ON users.id = user_roles.user_id";
+    String SELECT_USER_BY_ID = "SELECT * FROM users JOIN user_roles ON users.id = user_roles.user_id WHERE users.id = ?";
 
     /*Sql queries for Roles*/
     String INSERT_NEW_ROLE = "INSERT INTO user_roles VALUES (?,?)";
-    String SELECT_ROLE = "SELECT * FROM user_roles WHERE user_id = ?";
+    String DELETE_USER_ROLE = "DELETE FROM user_roles WHERE user_id = ?";
 
     /*Sql queries for Products*/
     String INSERT_NEW_PRODUCT = "INSERT INTO products (code,name,price,type) VALUES (?,?,?,?)";

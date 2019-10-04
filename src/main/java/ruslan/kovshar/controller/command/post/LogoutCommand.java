@@ -17,7 +17,7 @@ public class LogoutCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        session.invalidate();
+        session.removeAttribute("user");
         return URI.REDIRECT + request.getServletPath() + URI.LOGIN + Params.PARAM + Params.LOGOUT;
     }
 }

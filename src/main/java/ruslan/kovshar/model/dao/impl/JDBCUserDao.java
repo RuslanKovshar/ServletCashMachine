@@ -10,6 +10,7 @@ import ruslan.kovshar.model.exceptions.UserExistException;
 import ruslan.kovshar.textconstants.SQL;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,7 @@ public class JDBCUserDao implements UserDao {
     @Override
     public Optional<User> findByEmailAndPassword(String email, String password) {
         Optional<User> result = Optional.empty();
-        try (PreparedStatement preparedStatement = connection.prepareCall(SQL.SELECT_USER_BY_EMAIL_AND_PASSWORD)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL.SELECT_USER_BY_EMAIL_AND_PASSWORD)) {
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -76,12 +77,47 @@ public class JDBCUserDao implements UserDao {
 
     @Override
     public User findById(Long id) {
-        throw new UnsupportedOperationException();
+        User user = null;
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL.SELECT_USER_BY_ID)) {
+            preparedStatement.setLong(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            UserMapper userMapper = new UserMapper();
+            RoleMapper roleMapper = new RoleMapper();
+
+            while (resultSet.next()) {
+                user = userMapper.extractFromResultSet(resultSet);
+                if (user != null) {
+                    user.getAuthorities().add(roleMapper.extractFromResultSet(resultSet));
+                }
+            }
+        } catch (SQLException e) {
+            log.error(e);
+        }
+        return user;
     }
 
     @Override
     public List<User> findAll() {
-        throw new UnsupportedOperationException();
+        List<User> users = new ArrayList<>();
+        try (Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(SQL.SELECT_ALL_USERS);
+
+            User user;
+            UserMapper userMapper = new UserMapper();
+            RoleMapper roleMapper = new RoleMapper();
+
+            while (resultSet.next()) {
+                user = userMapper.extractFromResultSet(resultSet);
+                user.getAuthorities().add(roleMapper.extractFromResultSet(resultSet));
+                if (!users.contains(user)) {
+                    users.add(user);
+                }
+            }
+        } catch (SQLException e) {
+            log.error(e);
+        }
+        return users;
     }
 
     @Override

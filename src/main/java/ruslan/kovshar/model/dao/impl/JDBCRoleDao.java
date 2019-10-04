@@ -36,6 +36,16 @@ public class JDBCRoleDao implements RoleDao {
     }
 
     @Override
+    public void deleteUserRole(User user) {
+        try (final PreparedStatement ps = connection.prepareStatement(SQL.DELETE_USER_ROLE)) {
+            ps.setLong(1, user.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            log.error(e);
+        }
+    }
+
+    @Override
     public void create(Roles entity) {
         throw new UnsupportedOperationException();
     }

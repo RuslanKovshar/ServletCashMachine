@@ -12,7 +12,9 @@ import ruslan.kovshar.model.enums.Roles;
 import ruslan.kovshar.model.exceptions.UserExistException;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public class UserService {
 
@@ -77,8 +79,35 @@ public class UserService {
      * @param user user
      */
     public void updateUser(User user) {
-        try (UserDao userDao = daoFactory.createUserDao()) {
+        try (UserDao userDao = daoFactory.createUserDao();
+             RoleDao roleDao = daoFactory.createRoleDao()) {
+            roleDao.deleteUserRole(user);
+            Set<Roles> authorities = user.getAuthorities();
+            authorities.forEach(roles -> roleDao.setUserRole(user, roles));
             userDao.update(user);
+        }
+    }
+
+    /**
+     * finds all users
+     *
+     * @return list of users
+     */
+    public List<User> getAllUsers() {
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            return userDao.findAll();
+        }
+    }
+
+    /**
+     * finds user by id
+     *
+     * @param id user id
+     * @return user
+     */
+    public User getUserById(Long id) {
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            return userDao.findById(id);
         }
     }
 

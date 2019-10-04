@@ -11,6 +11,7 @@ import ruslan.kovshar.model.entity.User;
 import ruslan.kovshar.model.exceptions.UserExistException;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
@@ -60,14 +61,16 @@ public class JDBCUserDaoTest {
         userDao.create(user);
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void findById() {
-        userDao.findById(1L);
+        User user = userDao.findById(1L);
+        assertNotNull(user);
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void findAll() {
-        userDao.findAll();
+        List<User> users = userDao.findAll();
+        assertNotNull(users);
     }
 
     @Test

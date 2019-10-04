@@ -205,17 +205,23 @@ public class User {
         return authorities.contains(Roles.SENIOR_CASHIER);
     }
 
+    public boolean isAdmin() {
+        return authorities.contains(Roles.ADMIN);
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "email='" + email + '\'' +
+                "id=" + id +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", firstNameUA='" + firstNameUA + '\'' +
                 ", secondNameUA='" + secondNameUA + '\'' +
                 ", firstNameEN='" + firstNameEN + '\'' +
                 ", secondNameEN='" + secondNameEN + '\'' +
+                ", authorities=" + authorities +
+                ", checks=" + checks +
+                ", userCash=" + userCash +
                 '}';
     }
-
-
 }

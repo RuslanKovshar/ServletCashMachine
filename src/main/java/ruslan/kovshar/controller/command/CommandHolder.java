@@ -25,7 +25,10 @@ public class CommandHolder {
         commands.put(TextConstants.POST + URI.CHECK + URI.REMOVE_PRODUCT,   new CheckRemoveProductCommand());
         commands.put(TextConstants.POST + URI.PAYMENT,                      new PaymentCommand());
         commands.put(TextConstants.POST + URI.CANCEL_CHECK,                 new CancelCheckCommand());
+        commands.put(TextConstants.POST + URI.USER,                         new EditUserCommand());
 
+        commands.put(TextConstants.GET + URI.USER,                          new EditUserPageCommand());
+        commands.put(TextConstants.GET + URI.USERS,                         new AllUsersPageCommand());
         commands.put(TextConstants.GET + URI.CHECKS,                        new AllChecksPageCommand());
         commands.put(TextConstants.GET + URI.PAYMENT,                       new PayingPageCommand());
         commands.put(TextConstants.GET + URI.MERCHANDISER,                  new MerchandiserPageCommand());

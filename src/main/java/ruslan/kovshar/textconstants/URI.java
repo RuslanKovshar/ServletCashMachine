@@ -23,4 +23,6 @@ public interface URI {
     String PAYMENT = "/payment";
     String CHECKS = "/checks";
     String CANCEL_CHECK = "/cancel_check";
+    String USER = "/user";
+    String USERS = "/users";
 }
