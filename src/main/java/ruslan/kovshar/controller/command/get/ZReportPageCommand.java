@@ -7,6 +7,7 @@ import ruslan.kovshar.model.service.CheckService;
 import ruslan.kovshar.model.service.ReportService;
 import ruslan.kovshar.model.service.UserService;
 import ruslan.kovshar.textconstants.Pages;
+import ruslan.kovshar.textconstants.Params;
 import ruslan.kovshar.textconstants.TextConstants;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +32,7 @@ public class ZReportPageCommand implements Command {
      */
     @Override
     public String execute(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
+        User user = (User) request.getSession().getAttribute(Params.USER);
         List<Check> checks = checkService.getAllUserChecks(user);
 
         int countOfAllChecks = checks.size();
