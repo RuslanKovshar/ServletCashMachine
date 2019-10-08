@@ -41,7 +41,7 @@
 <c:if test="${sessionScope.user.isSeniorCashier()}">
     <form action="${pageContext.request.contextPath}/api/checks">
         <button type="submit" class="btn btn-success btn-lg btn-block mt-2">
-            All checks
+            <fmt:message key="all.checks.message"/>
         </button>
     </form>
 
