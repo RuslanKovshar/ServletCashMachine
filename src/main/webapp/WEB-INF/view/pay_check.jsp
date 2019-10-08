@@ -27,7 +27,11 @@
                         <div class="row ">
                             <div class="col-md-12">
                                 <input type="text" class="form-control" placeholder="Enter Card Number"
-                                       name="<%= Params.CARD_NUMBER %>">
+                                       name="<%= Params.CARD_NUMBER %>"
+                                       pattern="([0-9]{16})"
+                                       title="XXXXXXXXXXXXXXXX"
+                                       required
+                                       autofocus>
                             </div>
                         </div>
 
