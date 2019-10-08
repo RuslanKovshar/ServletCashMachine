@@ -1,7 +1,6 @@
-package ruslan.kovshar.controller.security;
+package ruslan.kovshar.controller.utils.security;
 
 import org.apache.log4j.Logger;
-import ruslan.kovshar.controller.command.post.MerchandiserStockCommand;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

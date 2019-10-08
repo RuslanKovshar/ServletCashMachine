@@ -1,4 +1,4 @@
-package ruslan.kovshar.controller.security;
+package ruslan.kovshar.controller.utils.security;
 
 import ruslan.kovshar.model.enums.Roles;
 import ruslan.kovshar.textconstants.URI;

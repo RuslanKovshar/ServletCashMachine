@@ -2,11 +2,10 @@ package ruslan.kovshar.model.service;
 
 import org.apache.log4j.Logger;
 import ruslan.kovshar.controller.dto.UserDTO;
-import ruslan.kovshar.controller.security.Encoder;
+import ruslan.kovshar.controller.utils.security.Encoder;
 import ruslan.kovshar.model.dao.DaoFactory;
 import ruslan.kovshar.model.dao.RoleDao;
 import ruslan.kovshar.model.dao.UserDao;
-import ruslan.kovshar.model.dao.impl.JDBCUserDao;
 import ruslan.kovshar.model.entity.User;
 import ruslan.kovshar.model.enums.Roles;
 import ruslan.kovshar.model.exceptions.UserExistException;

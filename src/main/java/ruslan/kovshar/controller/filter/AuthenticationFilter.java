@@ -1,7 +1,7 @@
 package ruslan.kovshar.controller.filter;
 
-import ruslan.kovshar.controller.security.SecurityUtils;
-import ruslan.kovshar.controller.security.UserRoleRequestWrapper;
+import ruslan.kovshar.controller.utils.security.SecurityUtils;
+import ruslan.kovshar.controller.utils.security.UserRoleRequestWrapper;
 import ruslan.kovshar.model.entity.User;
 import ruslan.kovshar.model.enums.Roles;
 import ruslan.kovshar.textconstants.Params;

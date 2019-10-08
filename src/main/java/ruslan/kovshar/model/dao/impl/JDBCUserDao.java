@@ -1,7 +1,7 @@
 package ruslan.kovshar.model.dao.impl;
 
 import org.apache.log4j.Logger;
-import ruslan.kovshar.controller.security.Encoder;
+import ruslan.kovshar.controller.utils.security.Encoder;
 import ruslan.kovshar.model.dao.UserDao;
 import ruslan.kovshar.model.dao.mapper.RoleMapper;
 import ruslan.kovshar.model.dao.mapper.UserMapper;

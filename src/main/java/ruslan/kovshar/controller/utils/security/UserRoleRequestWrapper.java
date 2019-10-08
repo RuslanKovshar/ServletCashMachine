@@ -1,11 +1,10 @@
-package ruslan.kovshar.controller.security;
+package ruslan.kovshar.controller.utils.security;
 
 import ruslan.kovshar.model.enums.Roles;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import java.security.Principal;
-import java.util.List;
 import java.util.Set;
 
 /**
